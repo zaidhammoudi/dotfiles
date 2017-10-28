@@ -58,7 +58,7 @@ exec xrdb -merge ~/.Xresources
 exec feh --bg-fill ~/.config/themer/current/wallpaper.jpg
 
 # Disable yubikey
-#exec xinput-toggle -r yubikey -d
+exec xinput-toggle -r yubikey -d
 
 # Wallpaper and theme
 # exec ~/bin/set_theme
@@ -88,7 +88,7 @@ bindsym $win+d exec dmenu_run
 bindsym $win+Control+l exec i3lock -c 000000
 
 # Enable Yubikey for 10 seconds
-#bindsym $win+l exec xinput-toggle -r yubikey -n -e -t 10
+bindsym $win+b exec xinput-toggle -r yubikey -n -e -t 5
 
 # Scratchpad
 bindsym $win+Shift+minus move scratchpad
@@ -129,6 +129,9 @@ bindsym $win+Shift+r restart
 
 # reload the configuration file
 bindsym $win+Shift+c reload
+
+# reload the configuration file
+bindsym $win+Shift+e exit
 
 #######################
 # Workspace keybinding

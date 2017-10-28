@@ -4,15 +4,7 @@ source ~/.zgen/zgen.zsh
 
 # enable vim mode
 set -o vi
-#bindkey jj vi-cmd-mode
-
-# command history
-bindkey "^R" history-incremental-search-backward
-bindkey "^F" history-incremental-search-forward
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-# This is more direct, but not as nice: bindkey -s '^x^x' '!!\n'
-bindkey '^x^x' repeat-last-command
+bindkey '^k' vi-cmd-mode
 
 if ! zgen-saved; then
     echo "Creating a zgen save"
@@ -22,10 +14,14 @@ if ! zgen-saved; then
     # Devservers should have different prompt than my workstations.
     # My workstations are always Arch
     if [[ $(uname -r | grep -o '....$') == "ARCH" ]]; then
-        zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+        #zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+        zgen oh-my-zsh themes/steeef
     else
         zgen oh-my-zsh themes/steeef
     fi
+
+    # Custom plugin
+    #zgen load coxley/zsh-files
 
     # Shell Syntax Highlighting
     zgen load zsh-users/zsh-syntax-highlighting
@@ -39,7 +35,7 @@ if ! zgen-saved; then
     zgen oh-my-zsh plugins/pip
     zgen oh-my-zsh plugins/python
     zgen oh-my-zsh plugins/sprunge
-    # zgen oh-my-zsh plugins/ssh-agent
+    zgen oh-my-zsh plugins/ssh-agent
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/systemd
     zgen oh-my-zsh plugins/tmux
@@ -56,13 +52,18 @@ fi
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zsh_post ] && source ~/.zsh_post
 [ -f ~/.zsh_theme ] && source ~/.zsh_theme
-[ -f /etc/grc.zsh ] && source /etc/grc.zsh
+
+setopt HIST_SAVE_NO_DUPS
 
 # FZF
+
 [ -f ~/.fzf.zsh ] \
-    || git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
-    ~/.fzf/install \
-    ln -s ~/.fzf/fzf ~/.local/bin/
+    || (
+        echo "FZF not installed, installing..."
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
+        && ~/.fzf/install \
+        && ln -s ~/.fzf/fzf ~/.local/bin/
+    )
 
 [ -f ~/.fzf.zsh ] \
     && source ~/.fzf.zsh \
@@ -74,21 +75,3 @@ export FZF_DEFAULT_OPTS='
  --color=fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
  --color=info:108,prompt:109,spinner:108,pointer:168,marker:168
 '
-
-
-
-
-export BULLETTRAIN_PROMPT_ORDER=(
-    time
-    status
-    custom
-    context
-    dir
-    perl
-    ruby
-    virtualenv
-    go
-    git
-    hg
-    cmd_exec_time
-)
