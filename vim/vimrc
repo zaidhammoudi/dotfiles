@@ -2,9 +2,6 @@
 " Editor Setup
 " ############
 
-" temp
-let g:go_version_warning = 0
-
 if has('nvim')
     " Commenting this out to maintain the same base dir for now. Configuration
     " should try to refer to s:editor_root instead of ~/.vim where possible to
@@ -185,8 +182,9 @@ au BufRead,BufNewFile *j2 set ts=2 sw=2 sts=2 expandtab ft=jinja
 au BufRead,BufNewFile *go set noexpandtab
 
 au BufRead,BufNewFile *.cconf set filetype=python
+au BufRead,BufNewFile *.mcconf set filetype=python
 au BufRead,BufNewFile *.cinc set filetype=python
-au BufRead,BufNewFile TARGETS set filetype=python
+au BufRead,BufNewFile TARGETS set filetype=bzl
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
 
