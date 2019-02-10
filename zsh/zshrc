@@ -1,6 +1,6 @@
 [ -f ~/.zsh_pre ] && source ~/.zsh_pre
 
-source ~/.zgen/zgen.zsh
+source ~/.zgen.zsh
 
 # enable vim mode
 set -o vi
@@ -11,14 +11,7 @@ if ! zgen-saved; then
 
     zgen oh-my-zsh
 
-    # Devservers should have different prompt than my workstations.
-    # My workstations are always Arch
-    if [[ $(uname -r | grep -o '....$') == "ARCH" ]]; then
-        #zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
-        zgen oh-my-zsh themes/steeef
-    else
-        zgen oh-my-zsh themes/steeef
-    fi
+    zgen oh-my-zsh themes/steeef
 
     # Custom plugin
     #zgen load coxley/zsh-files
@@ -75,3 +68,4 @@ export FZF_DEFAULT_OPTS='
  --color=fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
  --color=info:108,prompt:109,spinner:108,pointer:168,marker:168
 '
+export EDITOR=/bin/nvim

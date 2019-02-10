@@ -56,6 +56,10 @@ nnoremap <C-t> :Files<CR>
 nnoremap <CR> G
 nnoremap <BS> gg
 
+if filereadable('/etc/fbwhoami')
+    nnoremap <silent> <leader>n :call fzf#run({'source': '~/nfs/bin/wm', 'sink': 'e'})<CR>
+endif
+
 " vv or || to generate new vertical split
 nnoremap <silent> vv :vnew<CR>
 nnoremap <silent> <Bar><Bar> :vnew<CR>
@@ -178,8 +182,9 @@ au BufRead,BufNewFile *j2 set ts=2 sw=2 sts=2 expandtab ft=jinja
 au BufRead,BufNewFile *go set noexpandtab
 
 au BufRead,BufNewFile *.cconf set filetype=python
+au BufRead,BufNewFile *.mcconf set filetype=python
 au BufRead,BufNewFile *.cinc set filetype=python
-au BufRead,BufNewFile TARGETS set filetype=python
+au BufRead,BufNewFile TARGETS set filetype=bzl
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
 
@@ -341,8 +346,8 @@ set number                      " show line numbers
 "endif
 
 set cursorline                  " highlight current row cursor is in
-set backup                      " keep a backup file
-set backupdir=~/.vim/backup
+" set backup                      " keep a backup file
+" set backupdir=~/.vim/backup
 
 set showcmd                     " display incomplete commands
 set backspace=indent,eol,start
