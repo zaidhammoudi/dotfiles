@@ -5,6 +5,7 @@ source ~/.zgen.zsh
 # enable vim mode
 set -o vi
 bindkey '^k' vi-cmd-mode
+bindkey jj vi-cmd-mode
 
 if ! zgen-saved; then
     echo "Creating a zgen save"
