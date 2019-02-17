@@ -175,7 +175,7 @@ bindsym $win+Control+n move container to workspace back_and_forth; workspace bac
 ####################
 
 # split in vertical and horizontal orientation
-bindsym $win+g split h
+bindsym $win+h split h
 bindsym $win+v split v
 
 # Fullscreen
