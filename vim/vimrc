@@ -119,7 +119,6 @@ Plugin 'vim-airline/vim-airline'
 
 " Utility plugins
 Plugin 'neomake/neomake'
-Plugin 'coxley/codepad'
 Plugin 'keith/gist.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -187,6 +186,9 @@ au BufRead,BufNewFile *.cinc set filetype=python
 au BufRead,BufNewFile TARGETS set filetype=bzl
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
+
+" YAML Config
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " ##############
 " Split and tabs
@@ -434,7 +436,7 @@ let g:neomake_python_enabled_makers = ['flake8']
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 1
-let g:deoplete#enable_smart_case = 1
+" let g:deoplete#enable_smart_case = 1
 "
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
@@ -450,9 +452,9 @@ autocmd FileType python setlocal completeopt-=preview
 " let g:deoplete#sources#jedi#show_docstring = 1
 " let g:deoplete#sources#jedi#enable_cache = 1
 
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
+" if !exists('g:deoplete#omni#input_patterns')
+"   let g:deoplete#omni#input_patterns = {}
+" endif
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 

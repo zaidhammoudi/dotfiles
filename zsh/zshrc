@@ -1,6 +1,6 @@
 [ -f ~/.zsh_pre ] && source ~/.zsh_pre
 
-source ~/.zgen.zsh
+source ~/.zgen/zgen.zsh
 
 # enable vim mode
 set -o vi
