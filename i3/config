@@ -39,7 +39,7 @@ set $esc 0xff1b
 # exec xrandr --output eDP1 --primary
 
 # Start notification server
-exec dunst
+# exec dunst
 
 # Bar - not currently using
 # exec yabar
@@ -48,17 +48,17 @@ exec dunst
 exec nm-applet
 
 # Clipboard poweruser tool
-exec parcellite
+# exec parcellite
 
 # Update Xresources
-exec xrdb -merge ~/.Xresources
+# exec xrdb -merge ~/.Xresources
 
 #exec touchegg
 
-exec feh --bg-fill ~/.config/themer/current/wallpaper.jpg
+# exec feh --bg-fill ~/.config/themer/current/wallpaper.jpg
 
 # Disable yubikey
-exec xinput-toggle -r yubikey -d
+# exec xinput-toggle -r yubikey -d
 
 # Wallpaper and theme
 # exec ~/bin/set_theme
