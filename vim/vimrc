@@ -17,6 +17,9 @@ set rtp+=~/.fzf
 " Disable compatibility mode
 set nocompatible
 
+# iterm2 select text in vim
+:set mouse=
+
 set laststatus=2
 set list
 inoremap jj <Esc>
