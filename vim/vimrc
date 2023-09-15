@@ -2,24 +2,16 @@
 " Editor Setup
 " ############
 
-if has('nvim')
-    " Commenting this out to maintain the same base dir for now. Configuration
-    " should try to refer to s:editor_root instead of ~/.vim where possible to
-    " support this changing
-    " let s:editor_root=expand("~/.nvim")
-    let s:editor_root=expand("~/.vim")
-else
-    let s:editor_root=expand("~/.vim")
-endif
+let s:editor_root=expand("~/.vim")
 
 let mapleader=","
 cmap w!! %!sudo tee > /dev/null %
 
+let g:python3_host_prog = '/usr/bin/python3'
+
+
 " Setup runtime path
 let &rtp = &rtp . ',' . s:editor_root . '/bundle/Vundle.vim'
-let &rtp = &rtp . ',' . s:editor_root . expand("~/.local/lib/python3.5/site-packages/powerline/bindings/vim/")
-let &rtp = &rtp . ',' . s:editor_root . expand("~/.local/lib/python2.7/site-packages/powerline/bindings/vim/")
-let &rtp = &rtp . ',' . s:editor_root . expand("~/.local/lib/python2.6/site-packages/powerline/bindings/vim/")
 set rtp+=~/.fzf
 
 " Disable compatibility mode
