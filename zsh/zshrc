@@ -43,6 +43,14 @@ fi
 
 setopt HIST_SAVE_NO_DUPS
 
+# Git
+#
+# Autocomplete
+autoload -Uz compinit && compinit
+
+# kubectl autocomplete
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
 # FZF
 
 [ -f ~/.fzf.zsh ] \
