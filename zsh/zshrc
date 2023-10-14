@@ -71,7 +71,8 @@ export FZF_DEFAULT_OPTS='
  --color=fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
  --color=info:108,prompt:109,spinner:108,pointer:168,marker:168
 '
-export EDITOR=/bin/nvim
+
+# less colors
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -80,5 +81,26 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-export PATH="/Users/zaidh/Library/Python/3.9/bin:$PATH"
+if [[ "$(uname)" == "Darwin" ]]; then
+
+    # Hashicorp autocomplete
+    autoload -U +X bashcompinit && bashcompinit
+    complete -o nospace -C /opt/homebrew/bin/terraform terraform
+    complete -o nospace -C /opt/homebrew/bin/consul consul
+
+    export EDITOR=/bin/nvim
+
+    export PATH="/Users/zaidh/Library/Python/3.9/bin:$PATH"
+
+else
+
+    # Hashicorp autocomplete
+    autoload -U +X bashcompinit && bashcompinit
+    complete -o nospace -C /usr/bin/terraform terraform
+    complete -o nospace -C /usr/bin/consul consul
+
+    export EDITOR=/opt/homebrew/bin/nvim
+
+fi
+
 
