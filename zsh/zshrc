@@ -90,8 +90,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
     export EDITOR=/bin/nvim
 
-    export PATH="/Users/zaidh/Library/Python/3.9/bin:$PATH"
-
 else
 
     # Hashicorp autocomplete
