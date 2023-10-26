@@ -87,6 +87,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     autoload -U +X bashcompinit && bashcompinit
     complete -o nospace -C /opt/homebrew/bin/terraform terraform
     complete -o nospace -C /opt/homebrew/bin/consul consul
+    complete -o nospace -C /opt/homebrew/bin/vault vault
 
     export EDITOR=/bin/nvim
 
@@ -96,9 +97,11 @@ else
     autoload -U +X bashcompinit && bashcompinit
     complete -o nospace -C /usr/bin/terraform terraform
     complete -o nospace -C /usr/bin/consul consul
+    complete -o nospace -C /usr/bin/vault consul
 
     export EDITOR=/opt/homebrew/bin/nvim
 
 fi
+
 
 
