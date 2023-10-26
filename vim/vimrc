@@ -5,7 +5,7 @@
 let s:editor_root=expand("~/.vim")
 
 let mapleader=","
-cmap w!! %!sudo tee > /dev/null %
+cmap w!! %!echo '' | sudo -S tee > /dev/null %
 
 let g:python3_host_prog = '/usr/bin/python3'
 
@@ -182,7 +182,7 @@ au BufRead,BufNewFile *.cinc set filetype=python
 au BufRead,BufNewFile TARGETS set filetype=bzl
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
-au BufRead,BufNewFile *.sls set filetype=yaml
+au BufRead,BufNewFile *.sls set filetype=python
 
 " YAML Config
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
