@@ -89,7 +89,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     complete -o nospace -C /opt/homebrew/bin/consul consul
     complete -o nospace -C /opt/homebrew/bin/vault vault
 
-    export EDITOR=/bin/nvim
+    # Pagerduty
+    eval
+    PD_AC_ZSH_SETUP_PATH=/Users/zhammoudi/Library/Caches/pagerduty-cli/autocomplete/zsh_setup && test -f $PD_AC_ZSH_SETUP_PATH && source $PD_AC_ZSH_SETUP_PATH; # pd autocomplete setup
+
+    export EDITOR=/opt/homebrew/bin/nvim
 
 else
 
@@ -99,7 +103,7 @@ else
     complete -o nospace -C /usr/bin/consul consul
     complete -o nospace -C /usr/bin/vault consul
 
-    export EDITOR=/opt/homebrew/bin/nvim
+    export EDITOR=/bin/nvim
 
 fi
 
