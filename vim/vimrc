@@ -5,7 +5,8 @@
 let s:editor_root=expand("~/.vim")
 
 let mapleader=","
-cmap w!! %!echo '' | sudo -S tee > /dev/null %
+
+cmap w!! w !sudo tee % >/dev/null
 
 let g:python3_host_prog = '/usr/bin/python3'
 
