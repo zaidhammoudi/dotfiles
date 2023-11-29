@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title enable focused mode
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.author Zaid Hammoudi
+# @raycast.authorURL https://github.com/zaidhammoudi
+# @raycast.description enable focused mode
+# @raycast.packageName Developer Utils
+# @raycast.icon 🎧
+
+
 # Define the path to the hosts file
 HOSTS_FILE="/etc/hosts"
 
