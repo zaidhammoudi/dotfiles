@@ -52,10 +52,6 @@ nnoremap <C-t> :Files<CR>
 nnoremap <CR> G
 nnoremap <BS> gg
 
-if filereadable('/etc/fbwhoami')
-    nnoremap <silent> <leader>n :call fzf#run({'source': '~/nfs/bin/wm', 'sink': 'e'})<CR>
-endif
-
 " vv or || to generate new vertical split
 nnoremap <silent> vv :vnew<CR>
 nnoremap <silent> <Bar><Bar> :vnew<CR>
@@ -268,13 +264,6 @@ nnoremap <leader>ai :ArcInlines<CR>
 nnoremap <leader>al :ArcLint<CR>
 nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
 
-let fbgrep="~/bin/fbgrep"
-if filereadable(fbgrep)
-    set grepprg=~/bin/fbgrep
-else
-    set grepprg=/usr/bin/ag
-endif
-
 
 " #####################
 " Goyo/Distraction Free
@@ -412,20 +401,6 @@ let g:colorizer_auto_filetype='css,html,javascript'
 " #######
 
 autocmd BufWritePost,BufEnter * Neomake
-
-"  distributed flake8 binary is custom and doesn't support the same flags
-if filereadable('/etc/fbwhoami')
-    let g:neomake_python_flake8_maker = {
-        \ 'exe': '/usr/local/bin/flake8',
-        \ 'args': ['--shebang'],
-        \ 'errorformat':
-            \ '%E%f:%l: could not compile,%-Z%p^,' .
-            \ '%A%f:%l:%c: %t%n %m,' .
-            \ '%A%f:%l: %t%n %m,' .
-            \ '%-G%.%#',
-        \ 'postprocess': function('neomake#makers#ft#python#Flake8EntryProcess')
-        \ }
-endif
 let g:neomake_python_enabled_makers = ['flake8']
 
 " ########
