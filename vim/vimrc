@@ -178,7 +178,7 @@ au BufRead,BufNewFile *.cinc set filetype=python
 au BufRead,BufNewFile TARGETS set filetype=bzl
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
-au BufRead,BufNewFile *.sls set filetype=python
+au BufRead,BufNewFile *.sls set filetype=yaml
 
 " YAML Config
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
