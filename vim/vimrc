@@ -172,6 +172,7 @@ au BufRead,BufNewFile *yml set ts=2 sw=2 sts=2 expandtab
 au BufRead,BufNewFile *j2 set ts=2 sw=2 sts=2 expandtab ft=jinja
 au BufRead,BufNewFile *go set noexpandtab
 
+au BufRead,BufNewFile *.pconf set filetype=python
 au BufRead,BufNewFile *.cconf set filetype=python
 au BufRead,BufNewFile *.mcconf set filetype=python
 au BufRead,BufNewFile *.cinc set filetype=python
