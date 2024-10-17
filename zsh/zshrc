@@ -42,6 +42,8 @@ fi
 [ -f ~/.zsh_theme ] && source ~/.zsh_theme
 
 setopt HIST_SAVE_NO_DUPS
+HISTSIZE=100000   # Store 100,000 commands in memory
+SAVEHIST=100000   # Save 100,000 commands to disk
 
 # Git
 #
