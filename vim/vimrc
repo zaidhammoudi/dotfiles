@@ -1,6 +1,126 @@
-" ############
-" Editor Setup
-" ############
+" Basic Options
+" =============
+" Enables syntax highlighting based on file type.
+syntax on
+
+" Allows you to switch between unsaved buffers without being forced to save.
+set hidden
+
+" Enhances command-line completion with a visual menu for available options.
+set wildmenu                    " better cmd line completion
+set wildmode=list:longest       " more shell-like completion
+set wildignore=*.swp,*.bak,*.pyc,*.class
+
+" case-insensitive matching
+set ignorecase
+" unless there's upper-case specified
+set smartcase
+
+" Displays the cursor position in the status line (line and column numbers).
+set ruler
+
+" show line numbers
+set number
+
+" highlight current row cursor is in
+set cursorline
+
+" highlight search matches
+set hlsearch
+
+" highlight search matches while typing
+set incsearch
+
+" Prevents wrapping long lines to the next line.
+set nowrap
+
+" display + for wrapped lines
+set showbreak=+
+
+" always show at least 5 lines below/above cur
+set scrolloff=5
+
+" Updates the terminal window title with the file name being edited.
+set title
+
+" Disables the terminal bell sound, using a visual indicator instead.
+set visualbell
+
+" Display partial commands as you type in the bottom right.
+set showcmd
+
+" Make the Backspace key behave more intuitively in insert mode
+" - indent: Allows Backspace to delete leading indents
+" - eol: Allows Backspace to delete newline characters, merging lines if needed
+" - start: Allows Backspace to delete characters from before the current insert session
+set backspace=indent,eol,start
+
+
+" ###############
+" File formatting
+" ###############
+
+set encoding=utf8               " set utf-8 encoding
+set cindent                     " Indent after line ending in { and use cinwords
+set ts=4 sw=4 sts=4 expandtab   " Global tab settings
+set ai si                       " Auto & smart indent
+set textwidth=79
+set formatoptions+=r            " Auto insert the current comment prefix
+set formatoptions+=q            " Allow formatting of comments with 'gq'
+set ffs=unix,dos,mac            " prefer unix linefeed
+set pastetoggle=<f5>            " pressing f5 in insert mode will allow pasting
+
+
+" Key Mappings
+" ============
+
+" clear highlighting
+nnoremap <leader><leader>n :match<CR>:nohl<CR> " clears highlight
+
+" quit
+nnoremap <M-q> :q<CR>
+
+" Save Changes
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+nnoremap <leader>s :w<CR>
+
+nnoremap <leader><leader>s :Snippets<CR>
+
+" Map Control + t to open the file search interface (:Files).
+nnoremap <leader>t :Files<CR>
+nnoremap <C-t> :Files<CR>
+
+" Map Enter (<CR>) to move to the end of the file (G).
+nnoremap <CR> G
+
+" Map Backspace (<BS>) to move to the start of the file (gg).
+nnoremap <BS> gg
+
+" Map 'vv' to open a new vertical split (:vnew) silently.
+nnoremap <silent> vv :vnew<CR>
+
+" Map '||' (double pipe) to open a new vertical split silently.
+nnoremap <silent> <Bar><Bar> :vnew<CR>
+
+" Map '--' to open a new horizontal split (:new) silently.
+nnoremap <silent> -- <C-w>n
+
+" Map Control + J to move to the window below.
+nnoremap <C-J> <C-W><C-J>
+
+" Map Control + K to move to the window above.
+nnoremap <C-K> <C-W><C-K>
+
+" Map Control + L to move to the window to the right.
+nnoremap <C-L> <C-W><C-L>
+
+" Map Control + H to move to the window to the left.
+nnoremap <C-H> <C-W><C-H>
+
+" Map 'K' to grep for the word under the cursor and
+" open the quickfix window to show the results.
+nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
 
 let s:editor_root=expand("~/.vim")
 
@@ -41,26 +161,7 @@ highlight colorcolumn ctermbg=235 guibg=#2c2d27
 highlight OverLength ctermbg=white ctermfg=red
 match OverLength /\%81v.\+/
 
-" Bindings
-nnoremap <leader><leader>n :match<CR>:nohl<CR>
-nnoremap <M-q> :q<CR>
-nnoremap <C-s> :w<CR>
-nnoremap <leader>s :w<CR>
-nnoremap <leader><leader>s :Snippets<CR>
-nnoremap <leader>t :Files<CR>
-nnoremap <C-t> :Files<CR>
-nnoremap <CR> G
-nnoremap <BS> gg
 
-" vv or || to generate new vertical split
-nnoremap <silent> vv :vnew<CR>
-nnoremap <silent> <Bar><Bar> :vnew<CR>
-" -- to generate new vertical split
-nnoremap <silent> -- <C-w>n
-
-inoremap <leader><leader>s <Esc>:Snippets<CR>
-inoremap <C-s> <Esc>:w<CR>
-inoremap <leader>s <Esc>:w<CR>
 
 " #######
 " Plugins
@@ -191,10 +292,6 @@ autocmd FileType sls setlocal ts=2 sts=2 sw=2 expandtab
 "
 set splitbelow
 set splitright
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " Merge tab functions
 function MoveToPrevTab()
@@ -257,14 +354,6 @@ let g:NERDTreeIgnore = ['\.pyc$']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd BufWinEnter * NERDTreeMirror
 
-" ###############
-" Phabricator/Arc
-" ###############
-
-nnoremap <leader>ai :ArcInlines<CR>
-nnoremap <leader>al :ArcLint<CR>
-nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
-
 
 " #####################
 " Goyo/Distraction Free
@@ -308,57 +397,6 @@ au FileType go nmap <Leader>gs <Plug>(go-implements)
 au FileType go nmap <leader>gt <Plug>(go-test)
 au FileType go nmap <Leader>gr <Plug>(go-rename)
 
-" ##############
-" General Editor
-" ##############
-
-syntax on                       " enables syntax highlighting
-set hidden                      " multi-file behaviors
-set wildmenu                    " better cmd line completion
-set wildmode=list:longest       " more shell-like completion
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set ignorecase                  " case-insensitive matching
-set smartcase                   " unless there's upper-case specified
-set ruler                       " cursor position
-set hlsearch                    " highlight search matches
-set incsearch                   " highlight search matches while typing
-set nowrap                        " linewraps
-set scrolloff=5                 " always show at least 5 lines below/above cur
-set title                       " set window title
-set visualbell                  " turn off terminal bell
-set showbreak=+                 " display + for wrapped lines
-set number                      " show line numbers
-
-"Create backup dir if not present
-"let backupdir_=s:editor_root . '/backup'
-"if !filereadable(backupdir_)
-"    silent call mkdir(backupdir_, "p")
-"endif
-
-set cursorline                  " highlight current row cursor is in
-" set backup                      " keep a backup file
-" set backupdir=~/.vim/backup
-
-set showcmd                     " display incomplete commands
-set backspace=indent,eol,start
-
-if has("vms")
-    set nobackup
-endif
-
-" ###############
-" File formatting
-" ###############
-
-set encoding=utf8               " set utf-8 encoding
-set cindent                     " Indent after line ending in { and use cinwords
-set ts=4 sw=4 sts=4 expandtab   " Global tab settings
-set ai si                       " Auto & smart indent
-set textwidth=79
-set formatoptions+=r            " Auto insert the current comment prefix
-set formatoptions+=q            " Allow formatting of comments with 'gq'
-set ffs=unix,dos,mac            " prefer unix linefeed
-set pastetoggle=<f5>            " pressing f5 in insert mode will allow pasting
 
 " Maps <Leader>l to highlight current line
 " Entering :match will clear highlighting
