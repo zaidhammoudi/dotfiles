@@ -49,27 +49,74 @@ set visualbell
 " Display partial commands as you type in the bottom right.
 set showcmd
 
+" TODO This is the default - confirm and delete
 " Make the Backspace key behave more intuitively in insert mode
 " - indent: Allows Backspace to delete leading indents
 " - eol: Allows Backspace to delete newline characters, merging lines if needed
 " - start: Allows Backspace to delete characters from before the current insert session
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 
 
-" ###############
 " File formatting
-" ###############
+" ===============
 
-set encoding=utf8               " set utf-8 encoding
-set cindent                     " Indent after line ending in { and use cinwords
-set ts=4 sw=4 sts=4 expandtab   " Global tab settings
-set ai si                       " Auto & smart indent
+" Indent after line ending in { and use cinwords
+set cindent
+" Set the width of a tab character to 4 spaces
+set tabstop=4
+
+" Set the number of spaces to use for each level of indentation
+set shiftwidth=4
+
+" Set the number of spaces inserted when you press <Tab> in insert mode
+set softtabstop=4
+
+" Convert all tabs to spaces; makes indentation consistent across editors
+set expandtab
+
+" Enable automatic indentation and smart indentation
+set ai si
+
+" Set maximum line width for text to 79 characters
 set textwidth=79
-set formatoptions+=r            " Auto insert the current comment prefix
-set formatoptions+=q            " Allow formatting of comments with 'gq'
-set ffs=unix,dos,mac            " prefer unix linefeed
-set pastetoggle=<f5>            " pressing f5 in insert mode will allow pasting
 
+" Automatically insert the current comment prefix when pressing Enter
+set formatoptions+=r
+
+" Allow reformatting of comments using 'gq'
+set formatoptions+=q
+
+" Set file format support for line endings, preferring Unix-style line endings
+set ffs=unix,dos,mac
+
+" Toggle paste mode on/off with <F5>, making it easier to paste text without auto-indenting
+set pastetoggle=<f5>
+
+" Set command history to 1000 entries
+set history=1000
+
+" Allow up to 1000 levels of undo history
+set undolevels=1000
+
+" Disable compatibility mode
+set nocompatible
+
+" Disable mouse support in Vim, allowing normal text selection in iTerm2
+set mouse=
+
+" Always display the status line at the bottom of the window
+set laststatus=2
+
+" Show invisible characters like tabs and spaces to help with formatting
+set list
+set listchars=tab:\▸\ ,precedes:<,extends:>
+set listchars=tab:\»\ ,
+
+" Open horizontal splits below the current window instead of above
+set splitbelow
+
+" Open vertical splits to the right of the current window instead of to the left
+set splitright
 
 " Key Mappings
 " ============
@@ -82,6 +129,7 @@ nnoremap <M-q> :q<CR>
 
 " Save Changes
 nnoremap <C-s> :w<CR>
+" make it work in insert mode too
 inoremap <C-s> <Esc>:w<CR>
 nnoremap <leader>s :w<CR>
 
@@ -122,6 +170,24 @@ nnoremap <C-H> <C-W><C-H>
 " open the quickfix window to show the results.
 nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
 
+" Exit insert mode
+inoremap jj <esc>
+inoremap jJ <esc>
+inoremap Jj <esc>
+inoremap JJ <esc>
+inoremap jk <esc>
+inoremap jK <esc>
+inoremap Jk <esc>
+inoremap JK <esc>
+
+" Toggle folding at the current line in normal mode when pressing <Space>
+nnoremap <space> za
+
+" Create a fold for the visually selected lines when pressing <Space> in visual mode
+vnoremap <space> zf
+
+nnoremap <F3> :NERDTreeToggle<CR>
+
 let s:editor_root=expand("~/.vim")
 
 let mapleader=","
@@ -135,37 +201,14 @@ let g:python3_host_prog = '/usr/bin/python3'
 let &rtp = &rtp . ',' . s:editor_root . '/bundle/Vundle.vim'
 set rtp+=~/.fzf
 
-" Disable compatibility mode
-set nocompatible
-
-" iterm2 select text in vim
-:set mouse=
-
-set laststatus=2
-set list
-inoremap jj <Esc>
-
-set listchars=tab:\▸\ ,precedes:<,extends:>
-" set listchars=tab:\»\ ,
-
-" Disable Background Color Erase (BCE) so that color schemes
-" work properly when Vim is used inside tmux and GNU screen.
-
-" if &term =~ '256color'
-"     set t_ut=
-" endif
-
 " Create wall of highlight passed 80 characters and highlight text
 let &colorcolumn=join(range(81,999),",")
 highlight colorcolumn ctermbg=235 guibg=#2c2d27
 highlight OverLength ctermbg=white ctermfg=red
 match OverLength /\%81v.\+/
 
-
-
-" #######
 " Plugins
-" #######
+" =======
 
 " Install Vundle if not present
 let vundle_installed=1
@@ -241,10 +284,6 @@ Plugin 'ervandew/supertab'
 " Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-expand-region'
 
-" Distraction free
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-
 " C++
 Plugin 'vim-scripts/a.vim'
 
@@ -286,87 +325,12 @@ au BufRead,BufNewFile *.sls set filetype=yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType sls setlocal ts=2 sts=2 sw=2 expandtab
 
-" ##############
-" Split and tabs
-" ##############
-"
-set splitbelow
-set splitright
-
-" Merge tab functions
-function MoveToPrevTab()
-  "there is only one window
-  if tabpagenr('$') == 1 && winnr('$') == 1
-    return
-  endif
-  "preparing new window
-  let l:tab_nr = tabpagenr('$')
-  let l:cur_buf = bufnr('%')
-  if tabpagenr() != 1
-    close!
-    if l:tab_nr == tabpagenr('$')
-      tabprev
-    endif
-    sp
-  else
-    close!
-    exe "0tabnew"
-  endif
-  "opening current buffer in new window
-  exe "b".l:cur_buf
-endfunc
-
-function MoveToNextTab()
-  "there is only one window
-  if tabpagenr('$') == 1 && winnr('$') == 1
-    return
-  endif
-  "preparing new window
-  let l:tab_nr = tabpagenr('$')
-  let l:cur_buf = bufnr('%')
-  if tabpagenr() < tab_nr
-    close!
-    if l:tab_nr == tabpagenr('$')
-      tabnext
-    endif
-    sp
-  else
-    close!
-    tabnew
-  endif
-  "opening current buffer in new window
-  exe "b".l:cur_buf
-endfunc
-
-nnoremap mt :call MoveToNextTab()<CR>
-nnoremap mT :call MoveToPrevTab()<CR>
-
-
-" ########
-" NERDTree
-" ########
-
-nnoremap <F3> :NERDTreeToggle<CR>
-
 let g:NERDTreeIgnore = ['\.pyc$']
 
 " Close vim if NERDTree is the only window open and auto open for every tab
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd BufWinEnter * NERDTreeMirror
 
-
-" #####################
-" Goyo/Distraction Free
-" #####################
-
-" Map Goyo to key and trigger Limelight when Goyo is active
-nnoremap <F9> :Goyo<CR>
-autocmd User GoyoEnter Limelight
-autocmd User GoyoLeave Limelight!
-
-" ######
-" Python
-" ######
 
 let python_highlight_all = 1
 
@@ -402,9 +366,6 @@ au FileType go nmap <Leader>gr <Plug>(go-rename)
 " Entering :match will clear highlighting
 nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
                                 " without auto indentation being applied.
-" History
-set history=1000                " 1000 cmd history
-set undolevels=1000             " 1000 undo levels
 
 " #####
 " Gundo
@@ -570,8 +531,6 @@ set foldlevel=10
 let g:SimpylFold_fold_docstring = 0
 " autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 " autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-nnoremap <space> za
-vnoremap <space> zf
 
 " ##########
 " indentLine
@@ -587,22 +546,6 @@ vnoremap <space> zf
 " " none X terminal
 " let g:indentLine_color_tty_light = 7 " (default: 4)
 " let g:indentLine_color_dark = 1 " (default: 2)
-
-" #####################
-" Relative Line Numbers
-" #####################
-" Line number stuff. Set both for hybrid
-set number
-function! NumberToggle()
-  if(&rnu == 1)
-      set nornu
-    set nu
-  elseif(&nu == 1)
-    set nonu
-    set rnu
-  endif
-endfunc
-nnoremap <leader>i :call NumberToggle()<cr>
 
 " #############
 " expand-region
