@@ -1,0 +1,36 @@
+[user]
+    name = Zaid Hammoudi
+    email = zaid.hammoudi@gmail.com
+
+[core]
+    editor = vim
+
+[alias]
+    prettylog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[color]
+    ui = true
+
+[branch]
+    autoSetupMerge = always
+
+[push]
+    autoSetupRemote = true
+
+[delta]
+    side-by-side = true
+
+[credential "https://github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential
+
+[includeIf "onbranch:!hostname | grep -q 'MC2'"]
+    path = ~/.gitconfig-work-email
+
+[includeIf "onbranch:!hostname | grep -q 'Zaid'"]
+    path = ~/.gitconfig.home
+
