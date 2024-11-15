@@ -20,14 +20,6 @@
 [delta]
     side-by-side = true
 
-[credential "https://github.com"]
-    helper =
-    helper = !/usr/bin/gh auth git-credential
-
-[credential "https://gist.github.com"]
-    helper =
-    helper = !/usr/bin/gh auth git-credential
-
 [includeIf "onbranch:!hostname | grep -q 'MC2'"]
     path = ~/.gitconfig-work-email
 
