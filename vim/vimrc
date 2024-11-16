@@ -49,14 +49,6 @@ set visualbell
 " Display partial commands as you type in the bottom right.
 set showcmd
 
-" TODO This is the default - confirm and delete
-" Make the Backspace key behave more intuitively in insert mode
-" - indent: Allows Backspace to delete leading indents
-" - eol: Allows Backspace to delete newline characters, merging lines if needed
-" - start: Allows Backspace to delete characters from before the current insert session
-" set backspace=indent,eol,start
-
-
 " File formatting
 " ===============
 
@@ -90,7 +82,7 @@ set formatoptions+=q
 set ffs=unix,dos,mac
 
 " Toggle paste mode on/off with <F5>, making it easier to paste text without auto-indenting
-set pastetoggle=<f5>
+set pastetoggle=<F5>
 
 " Set command history to 1000 entries
 set history=1000
@@ -99,7 +91,10 @@ set history=1000
 set undolevels=1000
 
 " Disable compatibility mode
+" needed for vundle
 set nocompatible
+" Required for bug in Vundle - re-enable after plugin shit
+filetype plugin off
 
 " Disable mouse support in Vim, allowing normal text selection in iTerm2
 set mouse=
@@ -194,6 +189,7 @@ let mapleader=","
 
 cmap w!! w !sudo tee % >/dev/null
 
+" Needed for deoplete
 let g:python3_host_prog = '/usr/bin/python3'
 
 
@@ -223,8 +219,6 @@ if !filereadable(vundle_readme)
     let vundle_installed=0
 endif
 
-" Required for bug in Vundle - re-enable after plugin shit
-filetype plugin off
 
 call vundle#rc(s:editor_root . '/bundle')
 call vundle#begin()
@@ -233,8 +227,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Syntax plugins
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'trapd00r/irc.vim'
-Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'ClockworkNet/vim-junos-syntax'
 Plugin 'nathanalderson/yang.vim'
 Plugin 'mitsuhiko/vim-jinja'
@@ -244,53 +236,46 @@ Plugin 'fatih/vim-go'
 Plugin 'chase/vim-ansible-yaml'
 
 " Color schemes
-Plugin 'tomasr/molokai'
 Plugin 'joshdick/onedark.vim'
 Plugin 'altercation/vim-colors-solarized'
 
-Plugin 'guns/xterm-color-table.vim'
-
+" Status and tabline
 " Airline
 " Plugin 'joshdick/airline-onedark.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'powerline/powerline'
+
 
 " Utility plugins
 Plugin 'neomake/neomake'
-Plugin 'keith/gist.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'powerline/powerline'
-Plugin 'kana/vim-fakeclip'
-Plugin 'jlfwong/vim-arcanist'
-Plugin 'phleet/vim-mercenary'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'tpope/vim-abolish'
+" Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'kana/vim-fakeclip'
+" Plugin 'jlfwong/vim-arcanist'
+" Plugin 'phleet/vim-mercenary'
+" Plugin 'hynek/vim-python-pep8-indent'
+" Plugin 'tpope/vim-abolish'
+
 Plugin 'junegunn/fzf.vim'
 
 " Powerhouse plugins
 Plugin 'Rykka/riv.vim'
 Plugin 'Rykka/InstantRst'
-Plugin 'sjl/gundo.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
+
+" Autocomplete Plugins
 Plugin 'Shougo/deoplete.nvim'
-" Plugin 'zchee/deoplete-jedi'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'honza/vim-snippets'
-Plugin 'ervandew/supertab'
+" Plugin 'Shougo/ddc.vim'
+
+" Plugin 'honza/vim-snippets'
+" Plugin 'ervandew/supertab'
 " Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-expand-region'
-
-" C++
-Plugin 'vim-scripts/a.vim'
-
-" Web Development
-" Plugin 'mattn/emmet-vim'
-Plugin 'chrisbra/Colorizer'
-Plugin 'jelera/vim-javascript-syntax'
 
 if vundle_installed == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -308,7 +293,6 @@ filetype plugin indent on
 au BufRead,BufNewFile Dockerfile set ft=Dockerfile
 au BufRead,BufNewFile *.pp set ts=2 sw=2 sts=2 filetype=puppet
 au BufRead,BufNewFile *rb set ts=2 sw=2 sts=2 expandtab
-au BufRead,BufNewFile *yml set ts=2 sw=2 sts=2 expandtab
 au BufRead,BufNewFile *j2 set ts=2 sw=2 sts=2 expandtab ft=jinja
 au BufRead,BufNewFile *go set noexpandtab
 
@@ -367,12 +351,6 @@ au FileType go nmap <Leader>gr <Plug>(go-rename)
 nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
                                 " without auto indentation being applied.
 
-" #####
-" Gundo
-" #####
-
-nnoremap <F4> :GundoToggle<CR>
-
 " ######
 " Colors
 " ######
@@ -389,12 +367,6 @@ autocmd BufNewFile,BufRead *.md map <Leader>1 :HeaderDecrease<CR>
 autocmd BufNewFile,BufRead *.md map <Leader>2 :HeaderIncrease<CR>
 autocmd BufNewFile,BufRead *.md map <Leader>toc :Toch<CR>
 let g:vim_markdown_frontmatter=1
-
-" #########
-" Colorizer
-" #########
-
-let g:colorizer_auto_filetype='css,html,javascript'
 
 " #######
 " NeoMake
@@ -462,13 +434,6 @@ if !has('nvim')
     command! -register CopyMatches call CopyMatches(<q-reg>)
 endif
 
-
-" ##########
-" Table Mode
-" ##########
-
-nnoremap <silent> <Leader>tm :TableModeToggle
-
 " ####################
 " Snippets (Ultisnips)
 " ####################
@@ -503,23 +468,6 @@ endif
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-
-" ####################
-" One Dark Colorscheme
-" ####################
-
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.  If you're using
-"tmux version 2.2 or later, you can remove the outermost $TMUX check and use
-"tmux's 24-bit color support (see <
-"http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-" if (has("nvim"))
-"   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-"   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" endif
-" if (has("termguicolors"))
-"   set termguicolors
-" endif
-
 colorscheme onedark
 let g:airline_theme='onedark'
 
@@ -531,21 +479,6 @@ set foldlevel=10
 let g:SimpylFold_fold_docstring = 0
 " autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
 " autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-
-" ##########
-" indentLine
-" ##########
-
-" let g:indentLine_char = '┆'
-" " let g:indentLine_char = '¦'
-" " let g:indentLine_char = '|'
-"
-" let g:indentLine_color_term = 239
-" let g:indentLine_color_gui = '#A4E57E'
-"
-" " none X terminal
-" let g:indentLine_color_tty_light = 7 " (default: 4)
-" let g:indentLine_color_dark = 1 " (default: 2)
 
 " #############
 " expand-region
