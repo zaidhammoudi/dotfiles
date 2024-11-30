@@ -161,6 +161,12 @@ nnoremap <C-L> <C-W><C-L>
 " Map Control + H to move to the window to the left.
 nnoremap <C-H> <C-W><C-H>
 
+" Open a new tab with Ctrl+n in normal mode
+nnoremap <C-n> :tabnew<CR>
+" Open a new tab with <leader>n in normal mode
+nnoremap <leader>n :tabnew<CR>
+
+
 " Map 'K' to grep for the word under the cursor and
 " open the quickfix window to show the results.
 nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>

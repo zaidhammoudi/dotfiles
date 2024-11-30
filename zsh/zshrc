@@ -60,6 +60,7 @@ autoload -Uz compinit && compinit
         echo "FZF not installed, installing..."
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
         && ~/.fzf/install \
+        && mkdir -p ~/.local/bin \
         && ln -s ~/.fzf/fzf ~/.local/bin/
     )
 
