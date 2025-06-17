@@ -3,6 +3,8 @@
 " Enables syntax highlighting based on file type.
 syntax on
 
+
+let mapleader=","
 " Allows you to switch between unsaved buffers without being forced to save.
 set hidden
 
@@ -119,6 +121,9 @@ set splitright
 " clear highlighting
 nnoremap <leader><leader>n :match<CR>:nohl<CR> " clears highlight
 
+" scroll up and down
+nnoremap <Leader>d <C-d>
+nnoremap <Leader>s <C-u>
 " quit
 nnoremap <M-q> :q<CR>
 
@@ -126,9 +131,9 @@ nnoremap <M-q> :q<CR>
 nnoremap <C-s> :w<CR>
 " make it work in insert mode too
 inoremap <C-s> <Esc>:w<CR>
-nnoremap <leader>s :w<CR>
+"nnoremap <leader>s :w<CR>
 
-nnoremap <leader><leader>s :Snippets<CR>
+"nnoremap <leader><leader>s :Snippets<CR>
 
 " Map Control + t to open the file search interface (:Files).
 nnoremap <leader>t :Files<CR>
@@ -191,7 +196,6 @@ nnoremap <F3> :NERDTreeToggle<CR>
 
 let s:editor_root=expand("~/.vim")
 
-let mapleader=","
 
 cmap w!! w !sudo tee % >/dev/null
 

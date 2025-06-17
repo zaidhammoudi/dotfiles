@@ -29,7 +29,6 @@ if ! zgen-saved; then
     zgen oh-my-zsh plugins/ssh-agent
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/systemd
-    zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/wd
 
     # Save zgen profile
@@ -110,3 +109,6 @@ else
     export EDITOR=/bin/nvim
 
 fi
+
+# Created by `pipx` on 2025-06-16 18:09:18
+export PATH="$PATH:/Users/zhammoudi/.local/bin"
