@@ -1,6 +1,6 @@
 [user]
     name = Zaid Hammoudi
-    email = zaid.hammoudi@gmail.com
+    email = 7748859+zaidhammoudi@users.noreply.github.com
 
 [core]
     editor = vim
@@ -19,10 +19,3 @@
 
 [delta]
     side-by-side = true
-
-[includeIf "onbranch:!hostname | grep -q 'MC2'"]
-    path = ~/.gitconfig-work-email
-
-[includeIf "onbranch:!hostname | grep -q 'Zaid'"]
-    path = ~/.gitconfig.home
-

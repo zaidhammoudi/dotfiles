@@ -96,6 +96,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     eval
     PD_AC_ZSH_SETUP_PATH=/Users/zhammoudi/Library/Caches/pagerduty-cli/autocomplete/zsh_setup && test -f $PD_AC_ZSH_SETUP_PATH && source $PD_AC_ZSH_SETUP_PATH; # pd autocomplete setup
 
+    export PATH="$PATH:/Users/zhammoudi/.local/bin"
     export EDITOR=/opt/homebrew/bin/nvim
 
 else
@@ -106,9 +107,15 @@ else
     complete -o nospace -C /usr/bin/consul consul
     complete -o nospace -C /usr/bin/vault consul
 
+    autoload -Uz compinit
+
+    compinit
+    # Source AWS completion if it exists
+    if type aws_completer &>/dev/null; then
+      complete -C "$(which aws_completer)" aws
+    fi
+
     export EDITOR=/bin/nvim
 
 fi
 
-# Created by `pipx` on 2025-06-16 18:09:18
-export PATH="$PATH:/Users/zhammoudi/.local/bin"
