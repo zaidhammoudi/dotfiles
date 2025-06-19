@@ -1,13 +1,18 @@
 #!/bin/bash
 set -e
 
-FILES=(zgen.zsh zshrc)
+# Paths
 
-SOURCE="$HOME/code/dotfiles/zsh"
-TARGET="$HOME"
+ZSH_SOURCE="$HOME/code/dotfiles/zsh/zshrc"
+ZSH_TARGET="$HOME/.zshrc"
+ln -sf $ZSH_SOURCE $ZSH_TARGET
+echo "Symlink created: $ZSH_TARGET → $ZSH_SOURCE"
 
-for file in "${FILES[@]}"; do
-  ln -sf "$DOTFILES_DIR/$file" "$TARGET_DIR/.$file"
-  echo "Symlink created: $TARGET_DIR/.$file → $DOTFILES_DIR/$file"
-done
 
+ZGEN_SOURCE="$HOME/code/dotfiles/zsh/zgen.zsh"
+
+ZGEN_TARGET="$HOME/.zgen/zgen.zsh"
+mkdir -p "$HOME/.zgen"
+
+ln -sf $ZGEN_SOURCE $ZGEN_TARGET
+echo "Symlink created: $ZGEN_TARGET → $ZGEN_SOURCE"
