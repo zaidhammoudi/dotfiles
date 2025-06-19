@@ -21,8 +21,8 @@ if ! zgen-saved; then
     # oh-my-zsh Plugins
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/mercurial
     zgen oh-my-zsh plugins/jsontools
+    zgen oh-my-zsh plugins/mercurial
     zgen oh-my-zsh plugins/pip
     zgen oh-my-zsh plugins/python
     zgen oh-my-zsh plugins/sprunge
@@ -92,11 +92,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
     complete -o nospace -C /opt/homebrew/bin/consul consul
     complete -o nospace -C /opt/homebrew/bin/vault vault
 
-    # Pagerduty
-    eval
-    PD_AC_ZSH_SETUP_PATH=/Users/zhammoudi/Library/Caches/pagerduty-cli/autocomplete/zsh_setup && test -f $PD_AC_ZSH_SETUP_PATH && source $PD_AC_ZSH_SETUP_PATH; # pd autocomplete setup
-
-    export PATH="$PATH:/Users/zhammoudi/.local/bin"
     export EDITOR=/opt/homebrew/bin/nvim
 
 else
