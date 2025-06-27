@@ -83,9 +83,6 @@ set formatoptions+=q
 " Set file format support for line endings, preferring Unix-style line endings
 set ffs=unix,dos,mac
 
-" Toggle paste mode on/off with <F5>, making it easier to paste text without auto-indenting
-set pastetoggle=<F5>
-
 " Set command history to 1000 entries
 set history=1000
 
@@ -95,8 +92,8 @@ set undolevels=1000
 " Disable compatibility mode
 " needed for vundle
 set nocompatible
-" Required for bug in Vundle - re-enable after plugin shit
-filetype plugin off
+filetype plugin indent on
+
 
 " Disable mouse support in Vim, allowing normal text selection in iTerm2
 set mouse=
@@ -200,7 +197,14 @@ let s:editor_root=expand("~/.vim")
 cmap w!! w !sudo tee % >/dev/null
 
 " Needed for deoplete
-let g:python3_host_prog = '/usr/bin/python3'
+if has('macunix')
+    " For macOS (often reports as 'macunix')
+    " Preferred: Use pipx path if you installed with it
+    let g:python3_host_prog = expand('~/venv/nvim-venv/bin/python3')
+elseif has('unix')
+    " For Linux and other Unix-like systems (excluding macOS)
+    let g:python3_host_prog = '/usr/bin/python3'
+endif
 
 
 " Setup runtime path
@@ -294,7 +298,6 @@ if vundle_installed == 0
 endif
 
 call vundle#end()
-filetype plugin indent on
 
 " #########
 " Filetypes
