@@ -111,6 +111,12 @@ else
     fi
 
     export EDITOR=/bin/nvim
+    export PATH="$PATH:/home/zhammoudi/bin"
+
+
 
 fi
 
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/consul consul
