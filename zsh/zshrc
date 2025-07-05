@@ -113,6 +113,7 @@ else
     export EDITOR=/bin/nvim
     export PATH="$PATH:/home/zhammoudi/bin"
 
+    [[ -s "/home/zhammoudi/.gvm/scripts/gvm" ]] && source "/home/zhammoudi/.gvm/scripts/gvm"
 
 
 fi
@@ -120,3 +121,4 @@ fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/consul consul
+
