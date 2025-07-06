@@ -1,11 +1,5 @@
 #!/bin/bash
 set -e
 
-# Define absolute paths
-SOURCE="$HOME/code/dotfiles/vim/vimrc"
-TARGET="$HOME/.vimrc"
-
-# Create the symlink
-ln -sf $SOURCE $TARGET
-
+ln -sf "$HOME/code/dotfiles/vim/cfg/" "$HOME/.config/nvim"
 echo "Symlink created"
