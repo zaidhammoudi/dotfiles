@@ -1,0 +1,27 @@
+\set PROMPT1 '%[%033[1;31m%]%n@%/%[%033[0m%]# '
+
+-- Show query execution time
+\timing on
+
+-- Use expanded display for wide tables
+\x auto
+
+-- Set pager to less with case-insensitive search
+\setenv PAGER 'less -iMFXSx4'
+
+-- Helpful aliases
+\set version 'SELECT version();'
+\set extensions 'SELECT * FROM pg_available_extensions ORDER BY name;'
+\set tables 'SELECT schemaname, tablename FROM pg_tables WHERE schemaname NOT IN (\'information_schema\', \'pg_catalog\') ORDER BY schemaname, tablename;'
+
+-- Set editor
+\setenv EDITOR 'vim'
+
+-- Null display
+\pset null '[NULL]'
+
+-- Use Unicode line drawing characters
+\pset linestyle unicode
+
+-- Better formatting
+\pset border 2
