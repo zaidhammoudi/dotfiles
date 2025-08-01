@@ -122,3 +122,7 @@ fi
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/consul consul
 
+
+complete -o nospace -C /usr/bin/vault vault
+
+export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
