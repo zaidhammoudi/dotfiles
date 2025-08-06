@@ -28,3 +28,7 @@
 
 -- Better formatting
 \pset border 2
+
+-- Enable command history
+\set HISTFILE ~/.psql_history
+\set HISTCONTROL ignoredups
