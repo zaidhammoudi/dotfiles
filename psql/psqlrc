@@ -17,8 +17,7 @@
 -- Set editor
 \setenv EDITOR 'vim'
 
--- Enable vi mode for command line editing
-\! echo 'set editing-mode vi' >> ~/.inputrc
+-- Vi mode is configured in ~/.inputrc
 
 -- Null display
 \pset null '[NULL]'
