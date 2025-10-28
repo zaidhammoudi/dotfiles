@@ -111,6 +111,7 @@ else
 
     export EDITOR=/bin/nvim
     export PATH="$PATH:/home/zhammoudi/bin"
+    export PATH="/home/zhammoudi/.local/bin:$PATH"
 
     [[ -s "/home/zhammoudi/.gvm/scripts/gvm" ]] && source "/home/zhammoudi/.gvm/scripts/gvm"
 
