@@ -21,6 +21,7 @@ setopt HIST_FIND_NO_DUPS      # When searching history (like with arrow keys), d
 setopt HIST_SAVE_NO_DUPS      # When saving to the history file, older duplicate commands are omitted
 setopt SHARE_HISTORY          # Share history between all active shell sessions in real-time
 
+HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
@@ -28,32 +29,47 @@ SAVEHIST=100000
 [ -z $DISPLAY ] || BROWSER=google-chrome-stable
 
 # ============================================
-# Plugin Management (zgen)
+# Plugin Management (Zinit)
 # ============================================
 
-source ~/.zgen/zgen.zsh
-
-if ! zgen-saved; then
-    echo "Creating a zgen save"
-
-    zgen oh-my-zsh
-    zgen oh-my-zsh themes/steeef
-
-    # Syntax highlighting and suggestions
-    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load zsh-users/zsh-autosuggestions
-
-    # oh-my-zsh plugins
-    zgen oh-my-zsh plugins/common-aliases
-    zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/jsontools
-    zgen oh-my-zsh plugins/pip
-    zgen oh-my-zsh plugins/python
-    zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/wd
-
-    zgen save
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Plugins
+
+# Old zgen config:
+# source ~/.zgen/zgen.zsh
+#
+# if ! zgen-saved; then
+#     echo "Creating a zgen save"
+#
+#     zgen oh-my-zsh
+#     zgen oh-my-zsh themes/steeef
+#
+#     # Syntax highlighting and suggestions
+#     zgen load zsh-users/zsh-syntax-highlighting
+#     zgen load zsh-users/zsh-autosuggestions
+#
+#     # oh-my-zsh plugins
+#     zgen oh-my-zsh plugins/common-aliases
+#     zgen oh-my-zsh plugins/git
+#     zgen oh-my-zsh plugins/jsontools
+#     zgen oh-my-zsh plugins/pip
+#     zgen oh-my-zsh plugins/python
+#     zgen oh-my-zsh plugins/sudo
+#     zgen oh-my-zsh plugins/wd
+#
+#     zgen save
+# fi
 
 # ============================================
 # Completions
@@ -80,10 +96,13 @@ autoload -Uz compinit && compinit
 
 [ -f ~/.fzf.zsh ] \
     && source ~/.fzf.zsh \
+    && (( $+commands[ag] )) \
     && _fzf_compgen_path() { ag -g "" "$1" }
 
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+if (( $+commands[ag] )); then
+    export FZF_DEFAULT_COMMAND='ag -g ""'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
 export FZF_DEFAULT_OPTS='
  --color=fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
  --color=info:108,prompt:109,spinner:108,pointer:168,marker:168
@@ -98,16 +117,13 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# Go (g-install: do NOT edit)
-export GOPATH="$HOME/go"
-export GOROOT="$HOME/.go"
-export PATH="$GOPATH/bin:$PATH"
-
 # ============================================
 # Platform-specific
 # ============================================
 
 if [[ "$(uname)" == "Darwin" ]]; then
+
+    export GOROOT="/opt/homebrew/opt/go/libexec"
 
     # Hashicorp autocomplete
     autoload -U +X bashcompinit && bashcompinit
