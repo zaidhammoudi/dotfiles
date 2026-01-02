@@ -47,31 +47,6 @@ autoload -Uz _zinit
 # Plugins
 zinit light sindresorhus/pure
 
-# Old zgen config:
-# source ~/.zgen/zgen.zsh
-#
-# if ! zgen-saved; then
-#     echo "Creating a zgen save"
-#
-#     zgen oh-my-zsh
-#     zgen oh-my-zsh themes/steeef
-#
-#     # Syntax highlighting and suggestions
-#     zgen load zsh-users/zsh-syntax-highlighting
-#     zgen load zsh-users/zsh-autosuggestions
-#
-#     # oh-my-zsh plugins
-#     zgen oh-my-zsh plugins/common-aliases
-#     zgen oh-my-zsh plugins/git
-#     zgen oh-my-zsh plugins/jsontools
-#     zgen oh-my-zsh plugins/pip
-#     zgen oh-my-zsh plugins/python
-#     zgen oh-my-zsh plugins/sudo
-#     zgen oh-my-zsh plugins/wd
-#
-#     zgen save
-# fi
-
 # ============================================
 # Completions
 # ============================================
@@ -79,7 +54,7 @@ zinit light sindresorhus/pure
 autoload -Uz compinit && compinit
 
 # kubectl
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+# [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # ============================================
 # Tools
