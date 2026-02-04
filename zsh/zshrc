@@ -101,9 +101,10 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
     # Hashicorp autocomplete
     autoload -U +X bashcompinit && bashcompinit
-    complete -o nospace -C /opt/homebrew/bin/terraform terraform
-    complete -o nospace -C /opt/homebrew/bin/consul consul
-    complete -o nospace -C /opt/homebrew/bin/vault vault
+    complete -o nospace -C terraform terraform
+    complete -o nospace -C consul consul
+    complete -o nospace -C vault vault
+    complete -o nospace -C nomad nomad 
 
     export EDITOR=/opt/homebrew/bin/nvim
 
