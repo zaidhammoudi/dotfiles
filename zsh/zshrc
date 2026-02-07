@@ -98,6 +98,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 if [[ "$(uname)" == "Darwin" ]]; then
 
     export GOROOT="/opt/homebrew/opt/go/libexec"
+    export PATH="$PATH:$HOME/go/bin"
 
     # Hashicorp autocomplete
     autoload -U +X bashcompinit && bashcompinit
