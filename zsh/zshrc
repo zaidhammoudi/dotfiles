@@ -107,8 +107,8 @@ else
     complete -o nospace -C vault vault
 
     # AWS completion
-    if type aws_completer &>/dev/null; then
-      complete -C "$(which aws_completer)" aws
+    if (( $+commands[aws_completer] )); then
+      complete -C aws_completer aws
     fi
 
     export BROWSER=google-chrome-stable
