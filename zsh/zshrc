@@ -46,9 +46,6 @@ else
     compinit -C
 fi
 
-# kubectl
-# [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-
 # ============================================
 # Tools
 # ============================================
