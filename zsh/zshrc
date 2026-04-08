@@ -92,13 +92,12 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C terraform terraform
 complete -o nospace -C consul consul
 complete -o nospace -C vault vault
+complete -o nospace -C nomad nomad
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
     export GOROOT="/opt/homebrew/opt/go/libexec"
     export PATH="$PATH:$HOME/go/bin"
-
-    complete -o nospace -C nomad nomad
 
 else
 
