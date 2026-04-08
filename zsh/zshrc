@@ -62,6 +62,9 @@ fi
 # Tools
 # ============================================
 
+# Theme
+zinit light sindresorhus/pure
+
 # FZF
 zinit ice from"gh-r" as"program" pick"fzf"
 zinit light junegunn/fzf
@@ -134,4 +137,3 @@ fi
 
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zsh_post ] && source ~/.zsh_post
-[ -f ~/.zsh_theme ] && source ~/.zsh_theme
