@@ -30,9 +30,9 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     echo "zinit not found — run install.sh"
 else
     source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+    autoload -Uz _zinit
+    (( ${+_comps} )) && _comps[zinit]=_zinit
 fi
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
 
 
 # ============================================
