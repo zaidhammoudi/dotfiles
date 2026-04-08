@@ -110,8 +110,14 @@ else
     export PATH="$PATH:$HOME/bin"
     export PATH="$HOME/.local/bin:$PATH"
 
-    # GVM (Go Version Manager)
-    [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+    # GVM (Go Version Manager) — lazy-loaded to avoid cd hook at startup
+    if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
+        gvm() {
+            unfunction gvm
+            source "$HOME/.gvm/scripts/gvm"
+            gvm "$@"
+        }
+    fi
 
 fi
 
