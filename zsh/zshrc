@@ -15,7 +15,6 @@ bindkey '^k' vi-cmd-mode
 # History
 setopt HIST_IGNORE_DUPS       # Do not record an event that was just recorded (prevents spamming same command)
 setopt HIST_IGNORE_SPACE      # Do not record lines beginning with a space (useful for hiding secrets/passwords)
-setopt APPEND_HISTORY         # Append new history to the history file rather than replacing it
 setopt HIST_FIND_NO_DUPS      # When searching history (like with arrow keys), don't show the same line twice
 setopt HIST_SAVE_NO_DUPS      # When saving to the history file, older duplicate commands are omitted
 setopt SHARE_HISTORY          # Share history between all active shell sessions in real-time
