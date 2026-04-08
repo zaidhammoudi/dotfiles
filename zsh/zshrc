@@ -34,7 +34,6 @@ else
     (( ${+_comps} )) && _comps[zinit]=_zinit
 fi
 
-
 # ============================================
 # Completions
 # ============================================
@@ -47,19 +46,21 @@ else
 fi
 
 # ============================================
-# Tools
+# Plugins
 # ============================================
 
 # Theme
 zinit light sindresorhus/pure
 
-# FZF
-zinit ice from"gh-r" as"program" pick"fzf"
+# FZF — loads binary from GitHub releases, shell integration via fzf --zsh
+zinit ice from"gh-r" as"program" pick"fzf" atload"source <(fzf --zsh)"
 zinit light junegunn/fzf
 
-zinit snippet "https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh"
-zinit snippet "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh"
+# ============================================
+# Environment
+# ============================================
 
+# FZF
 if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -80,38 +81,33 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
+export EDITOR=nvim
+
 # ============================================
 # Platform-specific
 # ============================================
 
-# Hashicorp autocomplete (required on both platforms)
+# Hashicorp autocomplete
 autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C terraform terraform
+complete -o nospace -C consul consul
+complete -o nospace -C vault vault
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
     export GOROOT="/opt/homebrew/opt/go/libexec"
     export PATH="$PATH:$HOME/go/bin"
 
-    complete -o nospace -C terraform terraform
-    complete -o nospace -C consul consul
-    complete -o nospace -C vault vault
     complete -o nospace -C nomad nomad
-
-    export EDITOR=/opt/homebrew/bin/nvim
 
 else
 
-    complete -o nospace -C terraform terraform
-    complete -o nospace -C consul consul
-    complete -o nospace -C vault vault
-
     # AWS completion
     if (( $+commands[aws_completer] )); then
-      complete -C aws_completer aws
+        complete -C aws_completer aws
     fi
 
     export BROWSER=google-chrome-stable
-    export EDITOR=/bin/nvim
     export PATH="$PATH:$HOME/bin"
     export PATH="$HOME/.local/bin:$PATH"
 
