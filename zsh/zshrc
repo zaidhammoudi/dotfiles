@@ -10,11 +10,11 @@
 
 # Vim mode
 set -o vi
-bindkey '^k' vi-cmd-mode
+bindkey 'jk' vi-cmd-mode
 
 # History
 setopt HIST_IGNORE_SPACE      # Do not record lines beginning with a space (useful for hiding secrets/passwords)
-setopt HIST_FIND_NO_DUPS      # When searching history (like with arrow keys), don't show the same line twice
+setopt HIST_FIND_NO_DUPS      # When searching history, don't show the same line twice
 setopt HIST_SAVE_NO_DUPS      # When saving to the history file, older duplicate commands are omitted
 setopt SHARE_HISTORY          # Share history between all active shell sessions in real-time
 
@@ -83,16 +83,16 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export EDITOR=nvim
 
-# ============================================
-# Platform-specific
-# ============================================
-
 # Hashicorp autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C terraform terraform
 complete -o nospace -C consul consul
 complete -o nospace -C vault vault
 complete -o nospace -C nomad nomad
+
+# ============================================
+# Platform-specific
+# ============================================
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
