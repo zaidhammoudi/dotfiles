@@ -27,7 +27,7 @@ SAVEHIST=100000
 # ============================================
 
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    echo "zinit not found — run install.sh"
+    echo "zinit not found — run make zinit"
 else
     source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
     autoload -Uz _zinit
@@ -38,6 +38,7 @@ fi
 # Completions
 # ============================================
 
+fpath=(~/completions $fpath)
 autoload -Uz compinit
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
     compinit
@@ -52,9 +53,8 @@ fi
 # Theme
 zinit light sindresorhus/pure
 
-# FZF — loads binary from GitHub releases, shell integration via fzf --zsh
-zinit ice from"gh-r" as"program" pick"fzf" atload"source <(fzf --zsh)"
-zinit light junegunn/fzf
+# FZF shell integration (binary managed by Homebrew)
+(( $+commands[fzf] )) && source <(fzf --zsh)
 
 # ============================================
 # Environment
@@ -84,11 +84,12 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export EDITOR=nvim
 
 # Hashicorp autocomplete
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C terraform terraform
-complete -o nospace -C consul consul
-complete -o nospace -C vault vault
-complete -o nospace -C nomad nomad
+for cmd in terraform consul vault nomad; do
+    if (( $+commands[$cmd] )); then
+        autoload -U +X bashcompinit && bashcompinit
+        complete -o nospace -C $cmd $cmd
+    fi
+done
 
 # ============================================
 # Platform-specific
@@ -96,7 +97,6 @@ complete -o nospace -C nomad nomad
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
-    export GOROOT="/opt/homebrew/opt/go/libexec"
     export PATH="$PATH:$HOME/go/bin"
 
 else
@@ -127,3 +127,4 @@ fi
 
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zsh_post ] && source ~/.zsh_post
+[ -f ~/.zsh_secrets ] && source ~/.zsh_secrets
