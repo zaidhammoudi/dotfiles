@@ -1,7 +1,7 @@
 # --- Font ---
-font-family  = "Berkeley Mono"
-font-style   = "Regular"        # weight variant: Regular, Medium, Bold, Italic
-font-size    = 20
+font-family  = "Berkeley Mono Medium"   # heavy weights ship as their own families; select via family, not font-style
+font-style   = "Regular"          # weight variant: Regular, Medium, SemiBold, Bold, ExtraBold, Black
+font-size    = 20               # comfortable on the U3219Q at native 4K; bump to 18–20 if scaling
 font-thicken = true             # makes glyphs bolder via macOS smoothing — helps on Retina, can look chunky on 1080p
 
 # OpenType features
@@ -11,13 +11,65 @@ font-feature = ccmp              # glyph composition/decomposition — safe defa
 font-feature = locl              # localized glyph variants — safe default
 font-feature = ss08              # Berkeley Mono stylistic set 8 — alternate glyph shapes
 
+# Slight breathing room between lines — easier to scan long code blocks
+adjust-cell-height = 10%
+
 # --- Theme ---
-theme = "Catppuccin Mocha"
+# theme = "Catppuccin Mocha"
 # theme = "Nord"
 # theme = "Gruvbox Dark"
-# theme = "Tokyo Night"
+theme = "Tokyo Night"
+
+# Subtle, not glassy — keeps contrast for syntax highlighting
+background-opacity = 0.95
+background-blur    = 10
+
+# --- Cursor ---
+cursor-style              = block
+cursor-style-blink        = false   # steady cursor is less distracting while reading code
+cursor-click-to-move      = true
+mouse-hide-while-typing   = true
+
+# --- Window ---
+window-padding-x          = 1
+window-padding-y          = 1
+window-padding-balance    = true
+window-save-state         = always  # restore tabs/windows on relaunch
+window-colorspace         = display-p3
+window-decoration         = true
+unfocused-split-opacity   = 0.10
+
+# --- macOS ---
+macos-option-as-alt       = true    # required for ⌥-keys in nvim/tmux/zsh bindings
+macos-titlebar-style      = tabs    # compact, native-feeling tabs
+macos-non-native-fullscreen = visible-menu
+quit-after-last-window-closed = true
+
+# --- Scrollback & shell ---
+scrollback-limit          = 100000000   # ~100MB — generous for long build/test logs
+shell-integration         = detect
+shell-integration-features = cursor,sudo,title
+copy-on-select            = clipboard
+clipboard-read            = allow
+clipboard-write           = allow
+clipboard-paste-protection = true       # warn on multi-line / suspicious paste
+
+# --- Bell & focus ---
+audible-bell              = false
+focus-follows-mouse       = false
 
 # --- Working Directory ---
 working-directory                = home   # new windows/tabs open in ~
 tab-inherit-working-directory    = false  # new tabs always go to ~, ignoring current dir
 window-inherit-working-directory = false  # new windows always go to ~, ignoring current dir
+
+# --- Keybinds (coding niceties) ---
+keybind = cmd+k=clear_screen
+keybind = cmd+shift+enter=toggle_fullscreen
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+shift+w=close_surface
+keybind = cmd+alt+left=goto_split:left
+keybind = cmd+alt+right=goto_split:right
+keybind = cmd+alt+up=goto_split:top
+keybind = cmd+alt+down=goto_split:bottom
