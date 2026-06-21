@@ -8,6 +8,8 @@ link:
 	ln -sf $(DOTFILES)/psql/psqlrc ~/.psqlrc
 	mkdir -p ~/.config
 	ln -sfn $(DOTFILES)/vim/cfg ~/.config/nvim
+	mkdir -p ~/.config/ghostty
+	ln -sf $(DOTFILES)/config.ghostty ~/.config/ghostty/config
 	mkdir -p ~/.ssh && chmod 700 ~/.ssh
 	ln -sf $(DOTFILES)/ssh/config ~/.ssh/config
 
