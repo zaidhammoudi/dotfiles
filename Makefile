@@ -1,18 +1,30 @@
 DOTFILES := $(shell pwd)
 
-link:
+zsh:
 	ln -sf $(DOTFILES)/zsh/zshrc ~/.zshrc
 	ln -sf $(DOTFILES)/zsh/zsh_aliases ~/.zsh_aliases
+
+git:
 	ln -sf $(DOTFILES)/git/gitconfig ~/.gitconfig
+
+tmux:
 	ln -sf $(DOTFILES)/tmux/tmux.conf ~/.tmux.conf
+
+psql:
 	ln -sf $(DOTFILES)/psql/psqlrc ~/.psqlrc
+
+nvim:
 	mkdir -p ~/.config
 	ln -sfn $(DOTFILES)/vim/cfg ~/.config/nvim
-	mkdir -p ~/.config/ghostty
-	ln -sf $(DOTFILES)/config.ghostty ~/.config/ghostty/config
+
+ssh:
 	mkdir -p ~/.ssh && chmod 700 ~/.ssh
 	ln -sf $(DOTFILES)/ssh/config ~/.ssh/config
 
-install: link
+ghostty:
+	mkdir -p ~/Library/Application\ Support/com.cmuxterm.app
+	ln -sf $(DOTFILES)/config.ghostty ~/Library/Application\ Support/com.cmuxterm.app/config.ghostty
 
-.PHONY: link install
+install: zsh git tmux psql nvim ssh ghostty
+
+.PHONY: install zsh git tmux psql nvim ssh ghostty
