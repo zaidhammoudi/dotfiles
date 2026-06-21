@@ -1,7 +1,8 @@
 # --- Font ---
-font-family  = "Berkeley Mono Medium"   # heavy weights ship as their own families; select via family, not font-style
-font-style   = "Regular"          # weight variant: Regular, Medium, SemiBold, Bold, ExtraBold, Black
-font-size    = 20               # comfortable on the U3219Q at native 4K; bump to 18–20 if scaling
+font-family  = "Berkeley Mono Medium"
+font-style   = "Regular"        # weight variant: Regular, Medium, Bold, Italic
+font-size    = 20
+>>>>>>> 6712884 (cmux + claude + sshconfig)
 font-thicken = true             # makes glyphs bolder via macOS smoothing — helps on Retina, can look chunky on 1080p
 
 # OpenType features

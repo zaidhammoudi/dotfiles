@@ -18,8 +18,13 @@
 [push]
     autoSetupRemote = true
 
-[delta]
-    side-by-side = true
+[credential]
+    helper = osxkeychain
 
-[include]
-    path = ~/.gitconfig.local
+[core]
+    excludesfile = ~/.gitignore_global
+    fsmonitor = true
+    untrackedCache = true
+
+[credential "https://dev.azure.com"]
+    useHttpPath = true

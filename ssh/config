@@ -1,3 +1,5 @@
+Include config_sapi
+
 Include ~/.ssh/config.local
 
 Host *
