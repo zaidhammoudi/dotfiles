@@ -1,0 +1,23 @@
+# --- Font ---
+font-family  = "Berkeley Mono"
+font-style   = "Regular"        # weight variant: Regular, Medium, Bold, Italic
+font-size    = 20
+font-thicken = true             # makes glyphs bolder via macOS smoothing — helps on Retina, can look chunky on 1080p
+
+# OpenType features
+font-feature = calt              # contextual alternates (e.g. character-pair substitutions)
+font-feature = liga              # standard ligatures (e.g. -> != =>)
+font-feature = ccmp              # glyph composition/decomposition — safe default
+font-feature = locl              # localized glyph variants — safe default
+font-feature = ss08              # Berkeley Mono stylistic set 8 — alternate glyph shapes
+
+# --- Theme ---
+theme = "Catppuccin Mocha"
+# theme = "Nord"
+# theme = "Gruvbox Dark"
+# theme = "Tokyo Night"
+
+# --- Working Directory ---
+working-directory                = home   # new windows/tabs open in ~
+tab-inherit-working-directory    = false  # new tabs always go to ~, ignoring current dir
+window-inherit-working-directory = false  # new windows always go to ~, ignoring current dir
