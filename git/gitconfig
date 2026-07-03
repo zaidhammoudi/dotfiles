@@ -27,4 +27,7 @@
     untrackedCache = true
 
 [credential "https://dev.azure.com"]
-    useHttpPath = true
+  useHttpPath = true
+
+[include]
+    path = ~/.gitconfig.local
