@@ -38,7 +38,7 @@ window-padding-balance    = true
 window-save-state         = always  # restore tabs/windows on relaunch
 window-colorspace         = display-p3
 window-decoration         = true
-unfocused-split-opacity   = 0.10
+unfocused-split-opacity   = 0.6
 
 # --- macOS ---
 macos-option-as-alt       = true    # required for ⌥-keys in nvim/tmux/zsh bindings
