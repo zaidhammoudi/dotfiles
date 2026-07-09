@@ -1,1 +1,2 @@
 alias git_email='git config user.email "7748859+zaidhammoudi@users.noreply.github.com"'
+alias cat=bat
