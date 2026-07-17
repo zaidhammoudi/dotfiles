@@ -25,6 +25,10 @@ ghostty:
 	mkdir -p ~/Library/Application\ Support/com.cmuxterm.app
 	ln -sf $(DOTFILES)/config.ghostty ~/Library/Application\ Support/com.cmuxterm.app/config.ghostty
 
-install: zsh git tmux psql nvim ssh ghostty
+cmux:
+	mkdir -p ~/.config/cmux
+	ln -sf $(DOTFILES)/cmux.json ~/.config/cmux/cmux.json
 
-.PHONY: install zsh git tmux psql nvim ssh ghostty
+install: zsh git tmux psql nvim ssh ghostty cmux
+
+.PHONY: install zsh git tmux psql nvim ssh ghostty cmux
