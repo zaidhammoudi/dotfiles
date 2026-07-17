@@ -1,6 +1,10 @@
 Include config_sapi
 
+
+Include ~/.ssh/config_sapi
+Include ~/.colima/ssh_config
 Include ~/.ssh/config.local
+Include ~/.ssh/config.docker
 
 Host *
     ControlMaster auto
