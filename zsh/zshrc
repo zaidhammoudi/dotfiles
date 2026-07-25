@@ -68,10 +68,8 @@ if (( $+commands[fd] )); then
     _fzf_compgen_dir() { fd --type d --hidden --follow --exclude .git . "$1" }
 fi
 
-export FZF_DEFAULT_OPTS='
- --color=fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
- --color=info:108,prompt:109,spinner:108,pointer:168,marker:168
-'
+# FZF_DEFAULT_OPTS (Catppuccin Latte/Mocha) is set by the theme section below,
+# which swaps the palette to match the current light/dark mode.
 
 # Less colors (for man pages)
 export LESS_TERMCAP_md=$'\e[1;32m'
@@ -120,6 +118,58 @@ else
     fi
 
 fi
+
+# ============================================
+# cmux / ghostty / fzf theme switching
+# ============================================
+# `light` / `dark` swap the cmux/ghostty theme (rewrites the single `theme =`
+# line — cmux ignores Ghostty's dark:...,light:... auto syntax; apply with ⌘⇧,
+# in cmux, or ⌘Q + reopen) AND the fzf palette, then persist the mode so new
+# shells match.
+
+_ghostty_config="$HOME/code/dotfiles/config.ghostty"
+_ghostty_theme_dark="Tokyo Night"
+_ghostty_theme_light="TokyoNight Day"
+_theme_state="${XDG_STATE_HOME:-$HOME/.local/state}/theme-mode"
+
+# Catppuccin fzf palettes — Mocha (dark) / Latte (light).
+_fzf_opts_dark='--highlight-line
+ --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
+ --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
+ --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8'
+_fzf_opts_light='--highlight-line
+ --color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39
+ --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78
+ --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39'
+
+_apply_fzf_theme() {
+    if [[ "$1" == light ]]; then
+        export FZF_DEFAULT_OPTS="$_fzf_opts_light"
+    else
+        export FZF_DEFAULT_OPTS="$_fzf_opts_dark"
+    fi
+}
+
+_set_theme() {
+    local mode="$1" name
+    [[ "$mode" == light ]] && name="$_ghostty_theme_light" || name="$_ghostty_theme_dark"
+    mkdir -p "${_theme_state:h}" 2>/dev/null
+    print -r -- "$mode" > "$_theme_state"
+    # Rewrite the active `theme =` line (tolerant of spacing). Theme names are
+    # fixed constants with no sed-special chars, so the replacement is safe.
+    sed -i '' -E "s|^theme[[:space:]]*=.*|theme = \"${name}\"|" "$_ghostty_config"
+    if ! grep -q "^theme = \"${name}\"\$" "$_ghostty_config"; then
+        echo "warning: no active 'theme =' line updated in $_ghostty_config" >&2
+    fi
+    _apply_fzf_theme "$mode"
+    echo "theme → $mode  (fzf updated; press ⌘⇧, in cmux to apply the terminal theme)"
+}
+
+light() { _set_theme light }
+dark()  { _set_theme dark }
+
+# Adopt the persisted mode's fzf palette on shell startup (default dark).
+_apply_fzf_theme "$(cat "$_theme_state" 2>/dev/null)"
 
 # ============================================
 # Post-hooks
