@@ -1,16 +1,22 @@
 # --- Font ---
 font-family  = "Berkeley Mono Medium"
-font-style   = "Regular"        # weight variant: Regular, Medium, Bold, Italic
+# weight variant: Regular, Medium, Bold, Italic
+font-style   = "Regular"
 font-size    = 20
->>>>>>> 6712884 (cmux + claude + sshconfig)
-font-thicken = true             # makes glyphs bolder via macOS smoothing — helps on Retina, can look chunky on 1080p
+# makes glyphs bolder via macOS smoothing — helps on Retina, can look chunky on 1080p
+font-thicken = true
 
 # OpenType features
-font-feature = calt              # contextual alternates (e.g. character-pair substitutions)
-font-feature = liga              # standard ligatures (e.g. -> != =>)
-font-feature = ccmp              # glyph composition/decomposition — safe default
-font-feature = locl              # localized glyph variants — safe default
-font-feature = ss08              # Berkeley Mono stylistic set 8 — alternate glyph shapes
+# contextual alternates (e.g. character-pair substitutions)
+font-feature = calt
+# standard ligatures (e.g. -> != =>)
+font-feature = liga
+# glyph composition/decomposition — safe default
+font-feature = ccmp
+# localized glyph variants — safe default
+font-feature = locl
+# Berkeley Mono stylistic set 8 — alternate glyph shapes
+font-feature = ss08
 
 # Slight breathing room between lines — easier to scan long code blocks
 adjust-cell-height = 10%
@@ -19,6 +25,9 @@ adjust-cell-height = 10%
 # theme = "Catppuccin Mocha"
 # theme = "Nord"
 # theme = "Gruvbox Dark"
+# Light/dark switching: use the `light` / `dark` shell commands (defined in
+# zsh/zshrc), which rewrite this one line. cmux ignores Ghostty's native
+# dark:...,light:... auto-switch syntax, so we swap the theme explicitly.
 theme = "Tokyo Night"
 
 # Subtle, not glassy — keeps contrast for syntax highlighting
@@ -27,7 +36,8 @@ background-blur    = 10
 
 # --- Cursor ---
 cursor-style              = block
-cursor-style-blink        = false   # steady cursor is less distracting while reading code
+# steady cursor is less distracting while reading code
+cursor-style-blink        = false
 cursor-click-to-move      = true
 mouse-hide-while-typing   = true
 
@@ -35,34 +45,44 @@ mouse-hide-while-typing   = true
 window-padding-x          = 1
 window-padding-y          = 1
 window-padding-balance    = true
-window-save-state         = always  # restore tabs/windows on relaunch
+# restore tabs/windows on relaunch
+window-save-state         = always
 window-colorspace         = display-p3
 window-decoration         = true
 unfocused-split-opacity   = 0.6
 
 # --- macOS ---
-macos-option-as-alt       = true    # required for ⌥-keys in nvim/tmux/zsh bindings
-macos-titlebar-style      = tabs    # compact, native-feeling tabs
+# required for ⌥-keys in nvim/tmux/zsh bindings
+macos-option-as-alt       = true
+# compact, native-feeling tabs
+macos-titlebar-style      = tabs
 macos-non-native-fullscreen = visible-menu
 quit-after-last-window-closed = true
 
 # --- Scrollback & shell ---
-scrollback-limit          = 100000000   # ~100MB — generous for long build/test logs
+# ~100MB — generous for long build/test logs
+scrollback-limit          = 100000000
 shell-integration         = detect
 shell-integration-features = cursor,sudo,title
 copy-on-select            = clipboard
 clipboard-read            = allow
 clipboard-write           = allow
-clipboard-paste-protection = true       # warn on multi-line / suspicious paste
+# warn on multi-line / suspicious paste
+clipboard-paste-protection = true
 
 # --- Bell & focus ---
-audible-bell              = false
+# NOTE: `audible-bell` is not a valid Ghostty field (validation: "unknown field"),
+# so it was silently ignored. Left commented out — Ghostty has no audible bell by default.
+# audible-bell            = false
 focus-follows-mouse       = false
 
 # --- Working Directory ---
-working-directory                = home   # new windows/tabs open in ~
-tab-inherit-working-directory    = false  # new tabs always go to ~, ignoring current dir
-window-inherit-working-directory = false  # new windows always go to ~, ignoring current dir
+# new windows/tabs open in ~
+working-directory                = home
+# new tabs always go to ~, ignoring current dir
+tab-inherit-working-directory    = false
+# new windows always go to ~, ignoring current dir
+window-inherit-working-directory = false
 
 # --- Keybinds (coding niceties) ---
 keybind = cmd+k=clear_screen
