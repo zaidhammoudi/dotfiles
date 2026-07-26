@@ -8,6 +8,7 @@
 [alias]
     prettylog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     dm = diff --color-moved=plain
+    last = diff HEAD~1 --stat
 
 [color]
     ui = true
@@ -29,6 +30,3 @@
 
 [credential "https://dev.azure.com"]
     useHtpPath = true
-
-[include]
-    path = ~/.gitconfig.local
