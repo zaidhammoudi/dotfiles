@@ -1,10 +1,5 @@
 alias git_email='git config user.email "7748859+zaidhammoudi@users.noreply.github.com"'
 alias cat=bat
-<<<<<<< HEAD
-alias gs="git status"
-=======
 
 # git
 alias gs="git status"
-
->>>>>>> 897168d (push)
