@@ -24,6 +24,10 @@ i3:
 	[ -L ~/.config/i3status ] || [ ! -e ~/.config/i3status ] || rm -rf ~/.config/i3status
 	ln -sfn $(DOTFILES)/i3status ~/.config/i3status
 
+claude:
+	mkdir -p ~/.claude
+	ln -sf $(DOTFILES)/claude/statusline-command.sh ~/.claude/statusline-command.sh
+
 ssh:
 	mkdir -p ~/.ssh && chmod 700 ~/.ssh
 	ln -sf $(DOTFILES)/ssh/config ~/.ssh/config
@@ -36,6 +40,6 @@ cmux:
 	mkdir -p ~/.config/cmux
 	ln -sf $(DOTFILES)/cmux.json ~/.config/cmux/cmux.json
 
-install: zsh git tmux psql nvim i3 ssh ghostty cmux
+install: zsh git tmux psql nvim i3 claude ssh ghostty cmux
 
-.PHONY: install zsh git tmux psql nvim i3 ssh ghostty cmux
+.PHONY: install zsh git tmux psql nvim i3 claude ssh ghostty cmux

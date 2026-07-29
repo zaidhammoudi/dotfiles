@@ -178,3 +178,5 @@ _apply_fzf_theme "$(cat "$_theme_state" 2>/dev/null)"
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zsh_post ] && source ~/.zsh_post
 [ -f ~/.zsh_secrets ] && source ~/.zsh_secrets
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
