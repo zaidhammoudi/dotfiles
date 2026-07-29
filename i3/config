@@ -104,16 +104,15 @@ bindsym $win+Shift+m move workspace to output left
 floating_modifier $alt
 
 # Start a terminal
-bindsym $win+Return exec terminator
+bindsym $win+Return exec ghostty
 
 # Start a floating terminal
-bindsym $win+Control+Return exec terminator --role floating_terminal
+bindsym $win+Control+Return exec ghostty --x11-instance-name=floating_terminal
 
 # Kill focused window
 bindsym $win+c kill
 
 # change focus
-bindsym $win+h focus left
 bindsym $win+j focus down
 bindsym $win+k focus up
 bindsym $win+l focus right
@@ -147,7 +146,7 @@ bindsym $win+6 workspace $WS6
 bindsym $win+7 workspace $WS7
 bindsym $win+8 workspace $WS8
 bindsym $win+9 workspace $WS9
-bindsym $win+10 workspace $WS10
+bindsym $win+0 workspace $WS10
 bindsym $win+KP_7 workspace KP1
 bindsym $win+KP_8 workspace KP2
 
@@ -161,7 +160,7 @@ bindsym $win+Shift+6 move container to workspace $WS6
 bindsym $win+Shift+7 move container to workspace $WS7
 bindsym $win+Shift+8 move container to workspace $WS8
 bindsym $win+Shift+9 move container to workspace $WS9
-bindsym $win+Shift+10 move container to workspace $WS10
+bindsym $win+Shift+0 move container to workspace $WS10
 bindsym $win+Shift+KP_7 move container to workspace KP1
 bindsym $win+Shift+KP_8 move container to workspace KP2
 
@@ -204,7 +203,7 @@ new_window pixel 2
 # assign [class="(?i)chrome"] → $WS6
 
 # Floating terminal
-for_window [window_role=floating_terminal] floating enable
+for_window [instance="floating_terminal"] floating enable
 
 # Floating
 for_window [class="Thunar"] floating enable
@@ -276,7 +275,7 @@ client.placeholder      #000000  #0c0c0c  #ffffff #000000    #0c0c0c
 client.background       #ffffff
 
 bar {
-    status_command py3status
+    status_command i3status
     tray_output primary
     position bottom
     mode dock

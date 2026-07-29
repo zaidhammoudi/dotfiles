@@ -15,7 +15,7 @@ general {
 # order += "keyboard_layout"
  order += "ethernet vpn0"
  order += "wireless wlp4s0"
-order += "battery_level"
+order += "battery 0"
 order += "volume master"
 order += "time"
 
@@ -63,24 +63,11 @@ battery 0 {
      threshold_type = time
 }
 
-battery_level {
-    charging_character = "e"
-    charging_character = ""
-    notification = "True"
-    format = "{icon} {percent}%"
-    format_notify_discharging = "{percent}% - {time_remaining}"
-}
-
 volume master {
     format = "\t%volume"
     device = "pulse"
     mixer = "Master"
     mixer_idx = 0
-    on_click 1 = "exec pavucontrol"
-    on_click 2 = "exec pactl set-sink-mute 2 toggle"
-    on_click 3 = "exec killall pavucontrol"
-    on_click 4 = "exec pactl set-sink-volume 2 +1%"
-    on_click 5 = "exec pactl set-sink-volume 2 -1%"
 }
 
 

@@ -17,6 +17,13 @@ nvim:
 	mkdir -p ~/.config
 	ln -sfn $(DOTFILES)/vim/cfg ~/.config/nvim
 
+i3:
+	mkdir -p ~/.config
+	[ -L ~/.config/i3 ] || [ ! -e ~/.config/i3 ] || rm -rf ~/.config/i3
+	ln -sfn $(DOTFILES)/i3 ~/.config/i3
+	[ -L ~/.config/i3status ] || [ ! -e ~/.config/i3status ] || rm -rf ~/.config/i3status
+	ln -sfn $(DOTFILES)/i3status ~/.config/i3status
+
 ssh:
 	mkdir -p ~/.ssh && chmod 700 ~/.ssh
 	ln -sf $(DOTFILES)/ssh/config ~/.ssh/config
@@ -29,6 +36,6 @@ cmux:
 	mkdir -p ~/.config/cmux
 	ln -sf $(DOTFILES)/cmux.json ~/.config/cmux/cmux.json
 
-install: zsh git tmux psql nvim ssh ghostty cmux
+install: zsh git tmux psql nvim i3 ssh ghostty cmux
 
-.PHONY: install zsh git tmux psql nvim ssh ghostty cmux
+.PHONY: install zsh git tmux psql nvim i3 ssh ghostty cmux
