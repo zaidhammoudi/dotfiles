@@ -1,4 +1,4 @@
-# vim: set ft=i3:
+# vim: set ft=i3config:
 ############
 # Variables
 ############
@@ -137,18 +137,18 @@ bindsym $win+Shift+e exit
 #######################
 
 # switch to workspace
-bindsym $win+1 workspace $WS1
-bindsym $win+2 workspace $WS2
-bindsym $win+3 workspace $WS3
-bindsym $win+4 workspace $WS4
-bindsym $win+5 workspace $WS5
-bindsym $win+6 workspace $WS6
-bindsym $win+7 workspace $WS7
-bindsym $win+8 workspace $WS8
-bindsym $win+9 workspace $WS9
-bindsym $win+0 workspace $WS10
-bindsym $win+KP_7 workspace KP1
-bindsym $win+KP_8 workspace KP2
+bindsym $alt+1 workspace $WS1
+bindsym $alt+2 workspace $WS2
+bindsym $alt+3 workspace $WS3
+bindsym $alt+4 workspace $WS4
+bindsym $alt+5 workspace $WS5
+bindsym $alt+6 workspace $WS6
+bindsym $alt+7 workspace $WS7
+bindsym $alt+8 workspace $WS8
+bindsym $alt+9 workspace $WS9
+bindsym $alt+0 workspace $WS10
+bindsym $alt+KP_7 workspace KP1
+bindsym $alt+KP_8 workspace KP2
 
 # move focused container to workspace
 bindsym $win+Shift+1 move container to workspace $WS1
@@ -178,7 +178,7 @@ bindsym $win+h split h
 bindsym $win+v split v
 
 # Fullscreen
-bindsym $win+f fullscreen
+bindsym $alt+f fullscreen
 
 # Switch between layouts
 bindsym $win+s layout stacking
