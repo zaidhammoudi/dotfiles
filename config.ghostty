@@ -85,6 +85,9 @@ tab-inherit-working-directory    = false
 window-inherit-working-directory = false
 
 # --- Keybinds (coding niceties) ---
+keybind = ctrl+shift+equal=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+shift+0=reset_font_size
 keybind = cmd+k=clear_screen
 keybind = cmd+shift+enter=toggle_fullscreen
 keybind = cmd+d=new_split:right
