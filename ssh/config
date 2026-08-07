@@ -10,3 +10,7 @@ Host *
     ControlMaster auto
     ControlPath ~/.ssh/%r@%h:%p
     ControlPersist 4h
+    # Send a keepalive probe every 60s...
+    ServerAliveInterval 60
+    # ...and disconnect after 3 missed probes (180s) instead of hanging forever
+    ServerAliveCountMax 3
