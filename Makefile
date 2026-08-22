@@ -1,4 +1,5 @@
 DOTFILES := $(shell pwd)
+UNAME_S  := $(shell uname -s)
 
 zsh:
 	ln -sf $(DOTFILES)/zsh/zshrc ~/.zshrc
@@ -33,8 +34,13 @@ ssh:
 	ln -sf $(DOTFILES)/ssh/config ~/.ssh/config
 
 ghostty:
+ifeq ($(UNAME_S),Darwin)
 	mkdir -p ~/Library/Application\ Support/com.cmuxterm.app
 	ln -sf $(DOTFILES)/config.ghostty ~/Library/Application\ Support/com.cmuxterm.app/config.ghostty
+else
+	mkdir -p ~/.config/ghostty
+	ln -sf $(DOTFILES)/config.ghostty ~/.config/ghostty/config
+endif
 
 cmux:
 	mkdir -p ~/.config/cmux

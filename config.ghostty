@@ -28,7 +28,7 @@ adjust-cell-height = 10%
 # Light/dark switching: use the `light` / `dark` shell commands (defined in
 # zsh/zshrc), which rewrite this one line. cmux ignores Ghostty's native
 # dark:...,light:... auto-switch syntax, so we swap the theme explicitly.
-theme = "Tokyo Night"
+theme = "TokyoNight Day"
 
 # Subtle, not glassy — keeps contrast for syntax highlighting
 background-opacity = 0.95

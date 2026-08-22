@@ -157,12 +157,21 @@ _set_theme() {
     print -r -- "$mode" > "$_theme_state"
     # Rewrite the active `theme =` line (tolerant of spacing). Theme names are
     # fixed constants with no sed-special chars, so the replacement is safe.
-    sed -i '' -E "s|^theme[[:space:]]*=.*|theme = \"${name}\"|" "$_ghostty_config"
+    # BSD sed (macOS) requires an explicit '' after -i; GNU sed (Linux) does not.
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' -E "s|^theme[[:space:]]*=.*|theme = \"${name}\"|" "$_ghostty_config"
+    else
+        sed -i -E "s|^theme[[:space:]]*=.*|theme = \"${name}\"|" "$_ghostty_config"
+    fi
     if ! grep -q "^theme = \"${name}\"\$" "$_ghostty_config"; then
         echo "warning: no active 'theme =' line updated in $_ghostty_config" >&2
     fi
     _apply_fzf_theme "$mode"
-    echo "theme → $mode  (fzf updated; press ⌘⇧, in cmux to apply the terminal theme)"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "theme → $mode  (fzf updated; press ⌘⇧, in cmux to apply the terminal theme)"
+    else
+        echo "theme → $mode  (fzf updated; press ctrl+shift+, to reload Ghostty's config)"
+    fi
 }
 
 light() { _set_theme light }
