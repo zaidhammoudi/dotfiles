@@ -4,6 +4,8 @@
 
 [core]
     editor = nvim
+    # renders diff/show/log output through delta instead of the default `less`
+    pager = delta
 
 [alias]
     prettylog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
