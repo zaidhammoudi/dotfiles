@@ -128,8 +128,8 @@ fi
 # shells match.
 
 _ghostty_config="$HOME/code/dotfiles/config.ghostty"
-_ghostty_theme_dark="Tokyo Night"
-_ghostty_theme_light="TokyoNight Day"
+_ghostty_theme_dark="Atom One Dark"
+_ghostty_theme_light="Atom One Light"
 _theme_state="${XDG_STATE_HOME:-$HOME/.local/state}/theme-mode"
 
 # Catppuccin fzf palettes — Mocha (dark) / Latte (light).
@@ -150,6 +150,15 @@ _apply_fzf_theme() {
     fi
 }
 
+# delta (git pager) reads BAT_THEME as its default --syntax-theme.
+_apply_delta_theme() {
+    if [[ "$1" == light ]]; then
+        export BAT_THEME="OneHalfLight"
+    else
+        export BAT_THEME="OneHalfDark"
+    fi
+}
+
 _set_theme() {
     local mode="$1" name
     [[ "$mode" == light ]] && name="$_ghostty_theme_light" || name="$_ghostty_theme_dark"
@@ -167,6 +176,7 @@ _set_theme() {
         echo "warning: no active 'theme =' line updated in $_ghostty_config" >&2
     fi
     _apply_fzf_theme "$mode"
+    _apply_delta_theme "$mode"
     if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "theme → $mode  (fzf updated; press ⌘⇧, in cmux to apply the terminal theme)"
     else
@@ -177,8 +187,9 @@ _set_theme() {
 light() { _set_theme light }
 dark()  { _set_theme dark }
 
-# Adopt the persisted mode's fzf palette on shell startup (default dark).
+# Adopt the persisted mode's fzf/delta palettes on shell startup (default dark).
 _apply_fzf_theme "$(cat "$_theme_state" 2>/dev/null)"
+_apply_delta_theme "$(cat "$_theme_state" 2>/dev/null)"
 
 # ============================================
 # Post-hooks
