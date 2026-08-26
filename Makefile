@@ -46,6 +46,10 @@ cmux:
 	mkdir -p ~/.config/cmux
 	ln -sf $(DOTFILES)/cmux.json ~/.config/cmux/cmux.json
 
-install: zsh git tmux psql nvim i3 claude ssh ghostty cmux
+herdr:
+	mkdir -p ~/.config/herdr
+	ln -sf $(DOTFILES)/herdr/config.toml ~/.config/herdr/config.toml
 
-.PHONY: install zsh git tmux psql nvim i3 claude ssh ghostty cmux
+install: zsh git tmux psql nvim i3 claude ssh ghostty cmux herdr
+
+.PHONY: install zsh git tmux psql nvim i3 claude ssh ghostty cmux herdr
