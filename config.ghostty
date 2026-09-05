@@ -26,8 +26,7 @@ adjust-cell-height = 10%
 # theme = "Nord"
 # theme = "Gruvbox Dark"
 # Light/dark switching: use the `light` / `dark` shell commands (defined in
-# zsh/zshrc), which rewrite this one line. cmux ignores Ghostty's native
-# dark:...,light:... auto-switch syntax, so we swap the theme explicitly.
+# zsh/zshrc), which rewrite this one line to swap the theme.
 theme = "Atom One Light"
 
 # Subtle, not glassy — keeps contrast for syntax highlighting

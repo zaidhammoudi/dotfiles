@@ -1,5 +1,5 @@
 -- Light/dark switching for nvim, mirroring the `light`/`dark` shell commands
--- that swap the cmux/ghostty theme. The choice is persisted to a state file so
+-- that swap the Ghostty theme. The choice is persisted to a state file so
 -- new nvim sessions remember it (matching how the terminal config persists).
 --
 -- Usage inside nvim:  :Light   :Dark   (or the <leader>uB toggle keymap)

@@ -35,21 +35,17 @@ ssh:
 
 ghostty:
 ifeq ($(UNAME_S),Darwin)
-	mkdir -p ~/Library/Application\ Support/com.cmuxterm.app
-	ln -sf $(DOTFILES)/config.ghostty ~/Library/Application\ Support/com.cmuxterm.app/config.ghostty
+	mkdir -p ~/Library/Application\ Support/com.mitchellh.ghostty
+	ln -sf $(DOTFILES)/config.ghostty ~/Library/Application\ Support/com.mitchellh.ghostty/config
 else
 	mkdir -p ~/.config/ghostty
 	ln -sf $(DOTFILES)/config.ghostty ~/.config/ghostty/config
 endif
 
-cmux:
-	mkdir -p ~/.config/cmux
-	ln -sf $(DOTFILES)/cmux.json ~/.config/cmux/cmux.json
-
 herdr:
 	mkdir -p ~/.config/herdr
 	ln -sf $(DOTFILES)/herdr/config.toml ~/.config/herdr/config.toml
 
-install: zsh git tmux psql nvim i3 claude ssh ghostty cmux herdr
+install: zsh git tmux psql nvim i3 claude ssh ghostty herdr
 
-.PHONY: install zsh git tmux psql nvim i3 claude ssh ghostty cmux herdr
+.PHONY: install zsh git tmux psql nvim i3 claude ssh ghostty herdr

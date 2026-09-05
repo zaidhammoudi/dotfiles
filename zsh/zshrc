@@ -120,12 +120,12 @@ else
 fi
 
 # ============================================
-# cmux / ghostty / fzf theme switching
+# ghostty / fzf theme switching
 # ============================================
-# `light` / `dark` swap the cmux/ghostty theme (rewrites the single `theme =`
-# line — cmux ignores Ghostty's dark:...,light:... auto syntax; apply with ⌘⇧,
-# in cmux, or ⌘Q + reopen) AND the fzf palette, then persist the mode so new
-# shells match.
+# `light` / `dark` swap the Ghostty theme AND the fzf/delta palettes, then
+# persist the mode so new shells match. The Ghostty theme is applied by
+# rewriting the single `theme =` line in config.ghostty; reload it with ⌘⇧, in
+# Ghostty (macOS) or ctrl+shift+, on Linux, or restart Ghostty.
 
 _ghostty_config="$HOME/code/dotfiles/config.ghostty"
 _ghostty_theme_dark="Atom One Dark"
@@ -178,7 +178,7 @@ _set_theme() {
     _apply_fzf_theme "$mode"
     _apply_delta_theme "$mode"
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "theme → $mode  (fzf updated; press ⌘⇧, in cmux to apply the terminal theme)"
+        echo "theme → $mode  (fzf updated; press ⌘⇧, in Ghostty to reload the terminal theme)"
     else
         echo "theme → $mode  (fzf updated; press ctrl+shift+, to reload Ghostty's config)"
     fi
