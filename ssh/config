@@ -14,3 +14,15 @@ Host *
     ServerAliveInterval 60
     # ...and disconnect after 3 missed probes (180s) instead of hanging forever
     ServerAliveCountMax 3
+
+    # Automatically add keys to ssh-agent when used, so you don't need
+    # to run `ssh-add` manually every time you connect
+    AddKeysToAgent yes
+
+    # macOS-only: store/retrieve key passphrases from the macOS Keychain,
+    # so you're not prompted every time (especially after reboots)
+    UseKeychain yes
+
+    # Default private key to use for SSH connections when no other
+    # key is specified for a given host
+    IdentityFile ~/.ssh/id_ed25519
